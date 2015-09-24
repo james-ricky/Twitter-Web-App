@@ -1,0 +1,57 @@
+<div class="page">
+  <div class="row">
+    <div class="col-md-12 clearfix">
+      <div ng-if="usersSearches.canCreateSearch()" >
+        <a ui-sref="users.search_new" class="btn btn-primary pull-right">{{ 'users.searches.field.newSearch' | translate }}</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <strong><span class="glyphicon glyphicon-th"></span>{{ 'users.searches.field.searches' | translate }}</strong>
+    </div>
+    <div class="panel-body">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>{{ 'users.searches.field.name' | translate }}</th>
+            <th>{{ 'users.searches.field.startDate' | translate }}</th>
+            <th>{{ 'users.searches.field.endDate' | translate }}</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="search in usersSearches.searches">
+            <td>{{ search.name }}</td>
+            <td>{{ search.startDate | date:'yyyy-MM-dd' }}</td>
+            <td>
+              <span ng-if="search.endDate">
+                {{ search.endDate | date:'yyyy-MM-dd' }}
+              </span>
+              <span ng-if="!search.endDate">
+                {{ 'users.searches.field.neverEnd' | translate }}
+              </span>
+            </td>
+            <td>
+              <a ui-sref="users.search_show({ id: search.id })" class="btn btn-default">
+                {{ 'users.searches.field.view' | translate }}
+              </a>
+              <span ng-if="usersBase.me.role !== 'viewer'">
+                <a ui-sref="users.search_edit({ id: search.id })" class="btn btn-default">
+                  {{ 'users.searches.field.edit' | translate }}
+                </a>
+
+                <a ng-click="usersSearches.deleteSearch(search)" class="btn btn-danger">
+                  {{ 'users.searches.field.delete' | translate }}
+                </a>
+              </span>
+            </div>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

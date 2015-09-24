@@ -1,0 +1,26 @@
+<section data-ng-include="'users/layout/header.html'" class="header-container bg-white header-fixed"></section>
+
+<div class="main-container">
+  <aside data-ng-include="'users/layout/nav.html'"
+         class="nav-container nav-fixed nav-vertical bg-dark">
+  </aside>
+
+  <div id="content" class="content-container component-UsersBaseCtrl">
+    <div class="row" ng-if="usersBase.alertMessages.length > 0">
+      <div class="col-md-12">
+        <div class="divider"></div>
+
+        <div class="alert alert-danger">
+          <h3>{{ 'public.base.systemAlerts' | translate }}:</h3>
+          <ul>
+            <li ng-repeat="alertMessage in usersBase.alertMessages">
+              {{ alertMessage.text }}
+            </li>
+          </ul>
+          <div class="divider"></div>
+        </div>
+      </div>
+    </div>
+    <section class="view-container animate-fade-up" ui-view></section>
+  </div>
+</div>

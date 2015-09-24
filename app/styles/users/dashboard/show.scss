@@ -1,0 +1,93 @@
+ .controller-UsersDashboardsShowCtrl {
+  .ui-select {
+    margin: 0;
+  }
+
+  .dashboard-checkbox {
+    margin: 5px 0 10px 20px;
+  }
+
+  .widget-setting-links > ul > li {
+    float: left;
+    padding: 2px 5px;
+
+    & > a {
+      text-decoration: none;
+    }
+  }
+
+  .widget-title {
+    margin-top: 25px;
+  }
+
+  .media-content {
+    height: 40px;
+    font-size: 0.8em;
+  }
+
+  .donut-chart-container {
+    position: relative;
+  }
+
+  .donut-chart {
+    width: 300px;
+    height: 300px;
+    margin: auto;
+  }
+
+  .donut-chart-center {
+    height: 300px;
+    line-height: 300px;
+    position: absolute;
+    text-align: center;
+    top: 0;
+    vertical-align: middle;
+    width: 100%;
+    font-size: 3em;
+    font-weight: bold;
+    pointer-events: none;
+  }
+
+  .sentiment__positive {
+    color: #59B559;
+  }
+
+  .sentiment__negative {
+    color: #B55959;
+  }
+
+  .vector-map {
+    height: 300px;
+  }
+
+  .widget-loading, .widget-no-data-avalable {
+    min-height: 300px;
+  }
+
+  .widget-title {
+    .ti-filter {
+      font-size: 0.5em;
+    }
+  }
+
+  .myHandle {
+    cursor: move;
+}
+
+  .tooltip {
+    .widget-filter-options {
+      text-align: left;
+    }
+  }
+
+  #flotTip {
+    color: black !important;
+    background: white !important;
+    border: solid 1px #333 !important;
+    border-radius: 0.5em !important;
+  }
+
+  .media-body {
+    padding: 0px 10px;
+  }
+}

@@ -1,0 +1,169 @@
+{
+  "name": "lamplight_frontend",
+  "version": "0.1.0",
+  "author": "42 Labs <someone@42la.bs>",
+  "contributors": [
+    {
+      "name": "Eddie Lau",
+      "email": "3dd13@42la.bs",
+      "url": "http://www.42la.bs/"
+    }
+  ],
+  "description": "Lamplight web portal",
+  "repository": {
+    "type": "git",
+    "url": "http://git.42la.bs/42-labs/lamplight-frontend-users-v1.git"
+  },
+  "keywords": [],
+  "private": true,
+  "engines": {
+    "node": ">=0.10.26",
+    "npm": ">=2.6.0"
+  },
+  "dependencies": {
+    "express": "^4.12.0"
+  },
+  "devDependencies": {
+    "brfs": "^1.4.0",
+    "browser-sync": "^2.2.1",
+    "browserify": "^9.0.3",
+    "browserify-ngannotate": "^0.7.1",
+    "browserify-shim": "^3.8.3",
+    "del": "^1.1.1",
+    "gulp": "^3.8.11",
+    "gulp-angular-templatecache": "^1.5.0",
+    "gulp-autoprefixer": "^2.1.0",
+    "gulp-changed": "^1.1.1",
+    "gulp-if": "^1.2.5",
+    "gulp-imagemin": "^2.2.1",
+    "gulp-jshint": "^1.9.2",
+    "gulp-karma": "0.0.4",
+    "gulp-ng-constant": "^0.3.0",
+    "gulp-notify": "^2.2.0",
+    "gulp-preprocess": "^1.2.0",
+    "gulp-protractor": "0.0.12",
+    "gulp-rename": "^1.2.0",
+    "gulp-rev": "^3.0.1",
+    "gulp-sass": "^1.3.3",
+    "gulp-sourcemaps": "^1.3.0",
+    "gulp-streamify": "0.0.5",
+    "gulp-uglify": "^1.1.0",
+    "gulp-util": "^3.0.4",
+    "imagemin-pngcrush": "^4.0.0",
+    "jshint-stylish": "^1.0.1",
+    "karma": "^0.12.31",
+    "karma-bro": "^0.11.1",
+    "karma-chrome-launcher": "^0.1.7",
+    "karma-firefox-launcher": "^0.1.4",
+    "karma-jasmine": "^0.3.5",
+    "morgan": "^1.5.1",
+    "pretty-hrtime": "^1.0.0",
+    "protractor": "^1.7.0",
+    "run-sequence": "^1.0.2",
+    "shelljs": "^0.3.0",
+    "tiny-lr": "0.1.5",
+    "uglifyify": "^3.0.1",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.0.0",
+    "watchify": "^2.4.0",
+    "yargs": "^3.5.4"
+  },
+  "browserify": {
+    "transform": [
+      "browserify-shim"
+    ]
+  },
+  "browser": {
+    "allmighty-autocomplete": "./bower_components/allmighty-autocomplete/script/autocomplete.js",
+    "angular": "./bower_components/angular/angular.js",
+    "angular-ui-router": "./bower_components/angular-ui-router/release/angular-ui-router.js",
+    "angular-animate": "./bower_components/angular-animate/angular-animate.js",
+    "angular-bootstrap": "./bower_components/angular-bootstrap/ui-bootstrap-tpls.js",
+    "angular-cookies": "./bower_components/angular-cookies/angular-cookies.js",
+    "angular-moment": "./bower_components/angular-moment/angular-moment.js",
+    "angular-sanitize": "./bower_components/angular-sanitize/angular-sanitize.js",
+    "angular-sweetalert": "./bower_components/angular-sweetalert/SweetAlert.js",
+    "angular-touch": "./bower_components/angular-touch/angular-touch.js",
+    "angular-translate": "./bower_components/angular-translate/angular-translate.js",
+    "angular-ui-sortable": "./bower_components/angular-ui-sortable/sortable.js",
+    "angular-google-chart": "./bower_components/angular-google-chart/ng-google-chart.js",
+    "bootstrap": "./node_modules/bootstrap-sass-official/assets/javascripts/bootstrap/bootstrap.js",
+    "jquery": "./bower_components/jquery/dist/jquery.js",
+    "jquery.slimscroll": "./bower_components/jquery.slimscroll/jquery.slimscroll.js",
+    "lodash": "./bower_components/lodash/lodash.js",
+    "moment": "./bower_components/moment/moment.js",
+    "moment-locale": "./bower_components/moment/locale/zh-tw.js",
+    "ng-tags-input": "./bower_components/ng-tags-input/ng-tags-input.js",
+    "noty": "./bower_components/noty/js/noty/packaged/jquery.noty.packaged.js",
+    "restangular": "./bower_components/restangular/dist/restangular.js",
+    "sweetalert": "./bower_components/sweetalert/lib/sweet-alert.js",
+    "zeroclipboard": "./bower_components/zeroclipboard/dist/ZeroClipboard.js",
+    "braintree-web": "./bower_components/braintree-web/dist/braintree.js",
+    "jspdf": "./bower_components/jspdf/dist/jspdf.debug.js"
+  },
+  "browserify-shim": {
+    "angular": {
+      "exports": "angular",
+      "depends": [
+        "jquery"
+      ]
+    },
+    "angular-sweetalert": {
+      "depends": [
+        "angular",
+        "sweetalert"
+      ]
+    },
+    "angular-moment": {
+      "depends": [
+        "angular",
+        "moment:moment"
+      ]
+    },
+    "angular-translate": {
+      "depends": [
+        "angular"
+      ]
+    },
+    "angular-google-chart": {
+      "depends": [
+        "angular"
+      ]
+    },
+    "save-svg-as-png": {
+      "depends": [
+        "angular"
+      ]
+    },
+    "angular-ui-sortable": {
+      "depends": [
+        "angular"
+      ]
+    },
+    "jquery": "$",
+    "moment": "global:moment",
+    "braintree-web": "braintree",
+    "sweetalert": "swal",
+    "noty": {
+      "exports": "noty",
+      "depends": "jquery"
+    },
+    "zeroclipboard": "ZeroClipboard",
+    "restangular": {
+      "depends": [
+        "lodash:_"
+      ]
+    },
+    "jspdf": {
+      "depends": [
+        "angular"
+      ]
+    }
+  },
+  "scripts": {
+    "pretest": "npm install",
+    "test": "karma start test/karma.conf.js",
+    "preprotractor": "npm run update-webdriver",
+    "protractor": "npm run protractor test/protractor.conf.js"
+  }
+}

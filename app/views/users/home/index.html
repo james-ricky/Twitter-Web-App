@@ -1,0 +1,23 @@
+<div class="page">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <strong><span class="glyphicon glyphicon-th"></span> {{ 'users.home.field.home' | translate }}</strong>
+    </div>
+    <div class="panel-body"  >
+      <h2 id="b"> {{ 'users.home.field.welcome' | translate }}</h2>
+      <h3> {{ 'users.home.field.whatToDO' | translate }}</h3>
+      <div class="list">
+        <div ng-if="usersBase.me.role==='user'">
+          <p><a ui-sref="users.dashboards"> {{ 'users.home.field.viewDashboard' | translate }}</a></p>
+          <p><a ui-sref="users.search_new"> {{ 'users.home.field.createNew' | translate }}</a></p>
+          <p><a ui-sref="users.profile"> {{ 'users.home.field.manageAccount' | translate }}</a></p>
+        </div>
+        <div ng-if="usersBase.me.role==='viewer'">
+          <p><a ui-sref="users.dashboards"> {{ 'users.home.field.viewDashboard' | translate }}</a></p>
+          <p><a ui-sref="users.reports"> {{ 'users.home.field.viewReports' | translate }}</a></p>
+          <p><a ui-sref="users.profile"> {{ 'users.home.field.manageAccount' | translate }}</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

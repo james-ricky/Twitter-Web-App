@@ -1,0 +1,52 @@
+<div>
+  <div class="invitation-header">
+    <section class="logo text-center">
+      <h1>
+        <a ui-sref="public.login">
+          <img src="/images/logo.png" />
+          Lamplight
+        </a>
+      </h1>
+    </section>
+  </div>
+
+  <div class="form-container">
+
+    <div class="additional-info text-center">
+      <p class="text-small">{{ 'public.invitation.field.notice' | translate }} <br/>{{ 'public.invitation.field.notice2' | translate }}</p>
+    </div>
+
+    <div class="form-container text-center">
+
+      <form class="form-horizontal" ng-submit="publicInvitation.setPassword()">
+        <div class="alert alert-danger" ng-if="publicInvitation.errorMessage">
+          {{ publicInvitation.errorMessage }}
+        </div>
+        <div class="alert alert-success" ng-if="publicInvitation.noticeMessage">
+          {{ publicInvitation.noticeMessage }}
+        </div>
+
+        <div ng-if="publicInvitation.showLoginLink">
+          <a ui-sref="public.login" class="btn btn-lg btn-block btn-primary">{{ 'public.invitation.field.login' | translate }}</a>
+        </div>
+
+        <div ng-if="!publicInvitation.showLoginLink">
+          <div class="form-group">
+            <div class="input-group input-group-first">
+              <span class="input-group-addon">
+                <span class="ti-lock"></span>
+              </span>
+              <input type="password" class="form-control input-lg" placeholder="{{ 'public.invitation.field.password' | translate }}" required="" ng-model="publicInvitation.userInfo.password">
+            </div>
+          </div>
+
+          <div class="divider divider-lg"></div>
+          <div class="form-group">
+            <input type="submit" class="btn btn-lg btn-block btn-primary" value="{{ 'public.invitation.field.submit' | translate }}" ng-disabled="publicInvitation.formProcessing">
+          </div>
+        </div>
+      </form>
+    </div>
+
+  </div>
+</div>

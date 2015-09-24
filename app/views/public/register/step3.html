@@ -1,0 +1,292 @@
+<div>
+  <div class="register-header">
+    <section class="logo text-center">
+      <h1>
+        <a ui-sref="public.login">
+          <img src="/images/logo.png" />
+          Lamplight
+        </a>
+      </h1>
+    </section>
+  </div>
+
+  <div class="register-body--payment-plan">
+    <div class="container">
+      <div class="form-container" ng-if="publicRegisterStep3.noticeMessage !== ''">
+        <div class="alert alert-success">
+          {{ publicRegisterStep3.noticeMessage }}
+        </div>
+
+        <div>
+          <a ui-sref="public.login" class="btn btn-lg btn-block btn-primary">Go to Login page</a>
+        </div>
+      </div>
+      <div class="form-container" ng-if="publicRegisterStep3.noticeMessage === ''">
+        <!-- breadcrumbs -->
+        <div id="status-buttons" class="text-center">
+          <a>1.{{ 'public.registrations.field.profile' | translate }}<span><i class="fa fa-chevron-right"></i></span></a>
+          <a>2.{{ 'public.registrations.field.personalDetials' | translate }}<span><i class="fa fa-chevron-right"></i></span></a>
+          <a class="active">3. {{ 'public.registrations.field.paymentPlan' | translate }}<span><i class="fa fa-chevron-right"></i></span></a>
+        </div>
+      </div>
+      <div class="panel-body" ng-if="publicRegisterStep3.noticeMessage === ''">
+        <div>
+          <div class="form-container">
+            <div class="alert alert-danger" ng-if="publicRegisterStep3.errorMessage">
+              {{ publicRegisterStep3.errorMessage }}
+            </div>
+          </div>
+
+          <form
+            name="step3RegisterForm"
+            class="form-horizontal text-center"
+            ng-submit="publicRegisterStep3.updateRegistrationBillingDetails()"
+            novalidate>
+            <section>
+              <div class="additional-info text-center">
+                <h4>
+                  {{ 'public.registrations.notice.pickPaymentPlan' | translate }}
+                </h4>
+              </div>
+
+              <div class="divider divider-lg"></div>
+
+              <div class="row">
+                <div class="col-md-3 col-xsm-6" ng-repeat="paymentPlan in publicRegisterStep3.paymentPlans">
+                  <section class="pricing-table" ng-class="{'ui-ribbon-info ui-ribbon-container': paymentPlan.popular}">
+                    <div class="ui-ribbon-wrapper" ng-if="paymentPlan.popular">
+                      <div class="ui-ribbon">
+                        Popular
+                      </div>
+                    </div>
+
+                    <div class="pricing-header">
+                      <header>{{ paymentPlan.name }}</header>
+
+                      <div class="pricing-price">
+                        <strong>
+                          <sup>{{ 'public.registrations.field.US' | translate }} $</sup><span>{{ publicRegisterStep3.pricePerMonth(paymentPlan, publicRegisterStep3.selectedCommitment) | number: 2 }}</span><sub>/{{ 'public.registrations.field.month' | translate }}</sub>
+                        </strong>
+                      </div>
+                    </div>
+
+                    <hr/>
+
+                    <div class="pricing-body">
+                      <div>
+                        <h4>{{ 'public.registrations.field.credits' | translate }}</h4>
+                      </div>
+                      <ul>
+                        <li><strong>{{ paymentPlan.searchesPerMonth | formatSearchPerMonth }}</strong></li>
+                        <li><strong>{{ paymentPlan.mentionsPerMonth | formatMentionsPerMonth }}</strong> {{ 'public.registrations.field.mentionsPerMonth' | translate }}</li>
+                      </ul>
+
+                      <hr/>
+
+                      <div>
+                        <h4>{{ 'public.registrations.field.topupRates' | translate }}</h4>
+                      </div>
+                      <ul>
+                        <li class="pricing-topup-price">
+                          <sup>{{ 'public.registrations.field.US' | translate }} $</sup><span>{{ publicRegisterStep3.topupPricePerMonth(paymentPlan, publicRegisterStep3.selectedCommitment) }}</span><sub>/ {{ 'public.registrations.field.month' | translate }}</sub>
+                        </li>
+                        <li>{{ publicRegisterStep3.topupMentionsPerMonth(paymentPlan, publicRegisterStep3.selectedCommitment) | formatTopupMentionsPerMonth }} {{ 'public.registrations.field.mentions' | translate }}</li>
+                        <li>{{ publicRegisterStep3.topupSearchesPerMonth(paymentPlan, publicRegisterStep3.selectedCommitment) }} {{ 'public.registrations.field.liveSearch' | translate }}</li>
+                      </ul>
+                    </div>
+                    <footer>
+                      <a ng-click="publicRegisterStep3.setSelected(paymentPlan);" class="btn btn-line-primary" ng-class="{'selected': publicRegisterStep3.userInfo.paymentPlan === paymentPlan}">{{ 'public.registrations.field.select' | translate }}</a>
+                    </footer>
+                  </section>
+                </div>
+
+                <div class="col-md-3 col-xsm-6">
+                  <section class="pricing-table">
+                    <div class="pricing-header">
+                      <header>{{ 'public.registrations.field.other' | translate }}</header>
+                    </div>
+
+                    <hr/>
+
+                    <div class="pricing-body">
+                      <p ng-bind-html="'public.registrations.field.step3Notice' | translate"></p>
+                    </div>
+
+                    <footer>
+                      <a ng-click="publicRegisterStep3.setSelected(null);" class="btn btn-line-primary" ng-class="{'selected': publicRegisterStep3.userInfo.paymentPlan === null}">{{ 'public.registrations.field.select' | translate }}</a>
+                    </footer>
+                  </section>
+                </div>
+              </div>
+            </section>
+
+            <div class="divider divider-lg"></div>
+
+            <div class="row">
+              <div class="col-md-10 col-md-offset-1">
+                <div class="btn-group btn-group-justified" role="group">
+                  <a
+                    class="btn"
+                    ng-class="{'btn-primary': commitment === publicRegisterStep3.selectedCommitment, 'btn-line-primary': commitment !== publicRegisterStep3.selectedCommitment}"
+                    ng-click="publicRegisterStep3.setCommitment(commitment)"
+                    ng-repeat="commitment in publicRegisterStep3.allCommitments">
+                    <span>
+                      {{ 'public.registrations.field.subscribe' | translate }}
+                      {{ commitment }}
+                      <span ng-if="commitment === 1">
+                        {{ 'public.registrations.field.monthForSub' | translate }}
+                      </span>
+                      <span ng-if="commitment > 1">
+                        {{ 'public.registrations.field.months' | translate }}
+                      </span>
+                    </span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="divider divider-lg"></div>
+
+            <div class="additional-info text-center">
+              <p>
+                <a href="" ng-click="publicRegisterStep3.registerWithoutPaymentPlan()" class="">
+                  {{ 'public.registrations.field.step3Notice2' | translate }}
+
+                  <br/>
+
+                  {{ 'public.registrations.field.step3Notice3' | translate }}
+                </a>
+              </p>
+            </div>
+
+            <div ng-if="publicRegisterStep3.userInfo.paymentPlan !== null">
+              <div class="divider divider-dashed divider-lg pull-in"></div>
+
+              <div class="form-container">
+                <div class="additional-info text-center">
+                  <h4>
+                    {{ 'public.registrations.notice.youHavePromoCode' | translate }}
+                  </h4>
+                </div>
+
+                <div class="divider divider-lg"></div>
+
+                <div class="alert alert-success" ng-if="publicRegisterStep3.promotionText">
+                  {{ publicRegisterStep3.promotionText }}:{{ publicRegisterStep3.promotionPercentage }}{{ 'public.registrations.notice.promotionPercentageSuffix' | translate }}
+                  <br/>
+                </div>
+                <div class="alert alert-danger" ng-if="publicRegisterStep3.invalidPromoCodeError &amp;&amp; !publicRegisterStep3.promotionText">
+                  {{ 'public.registrations.field.promoCodeError' | translate }}
+                </div>
+
+                <div class="form-group">
+                  <div class="input-group input-group-first">
+                    <span class="input-group-addon">
+                      <span class="ti-ticket"></span>
+                    </span>
+                    <input name="promoCode" type="text" class="form-control input-lg" placeholder="{{ 'public.registrations.field.promoCode' | translate }}" ng-model="publicRegisterStep3.promoCode">
+                  </div>
+
+                  <div class="divider"></div>
+
+                  <a
+                    class="btn btn-block btn-primary"
+                    ng-disabled="publicRegisterStep3.canApplyPromoCode()"
+                    ng-click="publicRegisterStep3.applyPromoCode()">
+                    <span>{{ 'public.registrations.field.applyPromoCode' | translate }}</span>
+                  </a>
+                </div>
+              </div>
+
+              <div class="divider divider-dashed divider-lg pull-in"></div>
+
+              <div class="form-container">
+                <div class="additional-info text-center">
+                  <h4>
+                    {{ 'public.registrations.notice.paymentDetails' | translate }}
+                  </h4>
+                </div>
+
+                <div class="divider divider-lg"></div>
+
+                <div class="alert alert-danger" ng-if="publicRegisterStep3.errorMessage">
+                  {{ publicRegisterStep3.errorMessage }}
+                </div>
+
+                <div class="alert alert-danger" ng-if="step3RegisterForm.$submitted &amp;&amp; step3RegisterForm.$invalid">
+                  <ng-messages
+                    for="step3RegisterForm.cardHolderName.$error" ng-if="step3RegisterForm.cardHolderName.$invalid">
+                    <p ng-message="required">
+                      <div>{{ 'public.registrations.field.provideCardHolderName' | translate }}</div>
+                    </ng-message>
+                  </ng-messages>
+                  <ng-messages
+                    for="step3RegisterForm.creditCardNumber.$error" ng-if="step3RegisterForm.creditCardNumber.$invalid">
+                    <p ng-message="required">
+                      <div>{{ 'public.registrations.field.provideCreditCardNumber' | translate }}</div>
+                    </ng-message>
+                  </ng-messages>
+                  <ng-messages
+                    for="step3RegisterForm.creditCardExpiration.$error" ng-if="step3RegisterForm.creditCardExpiration.$invalid">
+                    <p ng-message="required">
+                      <div>{{ 'public.registrations.field.provideCreditCardExpiry' | translate }}</div>
+                    </ng-message>
+                  </ng-messages>
+                  <ng-messages
+                    for="step3RegisterForm.creditCardCvv.$error" ng-if="step3RegisterForm.creditCardCvv.$invalid">
+                    <p ng-message="required">
+                      <div>{{ 'public.registrations.field.provideCreditCardCvv' | translate }}</div>
+                    </ng-message>
+                  </ng-messages>
+                </div>
+
+                <div class="form-group">
+                  <div class="input-group input-group-first">
+                    <span class="input-group-addon">
+                      <span class="ti-user"></span>
+                    </span>
+                    <input name="cardHolderName" type="text" class="form-control input-lg" placeholder="{{ 'public.registrations.field.cardHolderName' | translate }}" required="" ng-model="publicRegisterStep3.userInfo.cardHolderName">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                      <span class="ti-credit-card"></span>
+                    </span>
+                    <input name="creditCardNumber" type="text" class="form-control input-lg" placeholder="{{ 'public.registrations.field.creditCard' | translate }}" required="" ng-model="publicRegisterStep3.userInfo.creditCardNumber">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                      <span class="ti-calendar"></span>
+                    </span>
+
+                    <div class="row">
+                      <div class="col-md-6">
+                        <input name="creditCardExpiration" type="text" class="form-control input-lg register-expiry" placeholder="{{ 'public.registrations.field.expiry' | translate }}" required="" ng-model="publicRegisterStep3.userInfo.expiry">
+                      </div>
+
+                      <div class="col-md-6">
+                        <input name="creditCardCvv" type="text" class="form-control input-lg" placeholder=" {{'public.registrations.field.cvv' | translate }}" required="" ng-model="publicRegisterStep3.userInfo.cvv">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-container">
+              <div class="divider divider-lg"></div>
+
+              <div class="form-group">
+                <input type="submit" value="{{ 'public.registrations.field.done' | translate }}" class="btn btn-primary btn-block btn-lg" ng-disabled="step3RegisterForm.$invalid">
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

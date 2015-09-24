@@ -1,0 +1,29 @@
+<div class="page">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <strong><span class="glyphicon glyphicon-th"></span> {{ 'users.alertMessages.field.alertMessages' | translate }}Alert Messages</strong>
+    </div>
+    <div class="panel-body">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>{{ 'users.alertMessages.field.createdAt' | translate }}Created At</th>
+            <th>{{ 'users.alertMessages.field.level' | translate }}Level</th>
+            <th>{{ 'users.alertMessages.field.alert' | translate }}Alert</th>
+            <th>{{ 'users.alertMessages.field.message' | translate }}Message</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="alertMessage in usersAlertMessages.alertMessages">
+            <td>{{ alertMessage.id }}</td>
+            <td><span am-time-ago="alertMessage.createdAt"></span></td>
+            <td>{{ alertMessage.level }}</td>
+            <td>{{ alertMessage.alertMessages.key }} {{ alertMessage.alertMessages.operator }} {{ alertMessage.alertMessages.value }}</td>
+            <td>{{ alertMessage.message }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

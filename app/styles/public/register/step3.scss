@@ -1,0 +1,164 @@
+.controller-PublicRegisterStep3IndexCtrl {
+  h1 {
+      font-weight: 300;
+      color: $bright;
+      font-size: 54px;
+      margin-bottom: 60px;
+      a {
+          color: $bright;
+      }
+  }
+
+  .form-group {
+      margin: 0;
+  }
+  .input-group-first {
+      border-top: 1px solid #DEDEDE;
+  }
+  .input-group {
+      padding: 6px 0;
+      border-bottom: 1px solid #DEDEDE;
+      width: 100%;
+
+      input, select, textarea {
+        color: black;
+      }
+      .register-expiry {
+        border-right: 1px solid #DEDEDE;
+      }
+  }
+
+  .input-group-addon {
+      background: transparent;
+      border: 0;
+      font-size: 24px;
+      color: $dark-light;
+  }
+  .input-lg {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .form-control {
+      border: 0;
+      border-radius: 0;
+      color: $bright;
+      font-weight: 300;
+      background: transparent;
+  }
+
+  ::-webkit-input-placeholder { color: #aaa; font-weight: 300 }
+  :-moz-placeholder { color: #aaa; font-weight: 300 } // Firefox 18-
+  ::-moz-placeholder { color: #aaa; font-weight: 300 } // Firefox 19+
+  :-ms-input-placeholder { color: #aaa; font-weight: 300 }
+
+  .register-header {
+      margin-top: 50px;
+      @media (min-width: $screen-sm) {
+          margin-top: 100px;
+      }
+  }
+
+  .logo {
+      font-size: 26px;
+      font-weight: normal;
+      // text-transform: uppercase;
+      a {
+          &:hover {
+              text-decoration: none;
+          }
+      }
+  }
+
+  .register-body {
+      padding: 20px 10px;
+  }
+
+  .form-container {
+      max-width: 420px;
+      margin: 10px auto;
+  }
+
+  .additional-info {
+      color: #777777;
+      a {
+          color: #777777;
+      }
+      p {
+        color: #777777;
+      }
+  }
+
+  .panel {
+    background-color: rgba(100,100,100,.3);
+    border: none;
+  }
+
+  .btn-line-primary {
+    color: $btn-primary-bg;
+
+    &:hover, &:focus:hover {
+      background-color: $btn-primary-bg;
+      color: $reverse;
+    }
+
+    &:focus {
+      background-color: $reverse;
+      color: $btn-primary-bg;
+    }
+
+    &.selected {
+      background-color: $btn-primary-bg;
+      color: $reverse;
+    }
+  }
+
+  .pricing-header {
+    min-height: 105px;
+  }
+
+  .pricing-body {
+    min-height: 270px;
+
+    .pricing-topup-price {
+      font-size: 16px;
+
+      sup {
+          font-size: 12px;
+          line-height: 1;
+          color: $brand-primary;
+      }
+      span {
+          font-size: 24px;
+          color: $brand-primary;
+          line-height: 1;
+          margin: 0 5px;
+      }
+      sub {
+          font-size: 8px;
+          line-height: 1;
+          color: $gray-light;
+      }
+    }
+
+    > ul {
+      font-size: 12px;
+        > li {
+          padding: 4px 0;
+          border-bottom: none;
+          strong {
+            color: $dark;
+            font-size: 14px;
+          }
+        }
+    }
+  }
+
+  .ui-radio {
+    margin-top: 10px;
+  }
+
+  .row--payment-plan-option {
+    margin-bottom: 15px;
+  }
+}

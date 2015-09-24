@@ -1,0 +1,54 @@
+<div class="page">
+
+  <div class="divider"></div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <strong><span class="glyphicon glyphicon-th"></span>{{ 'users.dashboards.field.editDashboard' | translate }} </strong>
+    </div>
+    <div class="panel-body">
+
+      <div class="alert alert-danger" ng-if="editDashboardForm.$submitted &amp;&amp; editDashboardForm.$invalid">
+        <ng-messages
+          for="editDashboardForm.editDashboardName.$error" ng-if="editDashboardForm.editDashboardName.$invalid">
+          <p ng-message="required">
+            <div>{{ 'users.dashboards.field.provideNewDashboardName' | translate }}</div>
+          </ng-message>
+        </ng-messages>
+      </div>
+
+      <form novalidate name="editDashboardForm" ng-submit="usersDashboardEdit.updateDashboard()">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="">{{ 'users.dashboards.field.name' | translate }} </label>
+              <i class="ti-help-alt" tooltip-placement="right" tooltip="{{ 'users.dashboards.field.name' | translate }}" tooltip-append-to-body="true"></i>
+              <input autofocus name="editDashboardName" type="text" class="form-control ng-pristine" required="" data-ng-model="usersDashboardEdit.dashboard.name">
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="">{{ 'users.dashboards.field.searches' | translate }} </label>
+              <i class="ti-help-alt" tooltip-placement="right" tooltip="{{ 'users.dashboards.field.location' | translate }}" tooltip-append-to-body="true"></i>
+
+              <br/>
+
+              <div class="row">
+                <div class="col-md-2" ng-repeat="search in usersDashboardEdit.allSearches">
+                  <label class="ui-checkbox dashboard-checkbox">
+                    <input type="checkbox" name="search" ng-model="usersDashboardEdit.dashboard.searches[search.id]" ng-value="search.id" ng-required="!usersDashboardEdit.selectedAtLeastOneSearch()"><span>{{ search.name }}</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <input type="submit" value="{{ 'users.dashboards.field.submit' | translate }}" class="btn btn-primary" ng-disabled="editDashboardForm.$invalid">
+      </form>
+    </div>
+  </div>
+</div>

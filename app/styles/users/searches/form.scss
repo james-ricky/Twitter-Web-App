@@ -1,0 +1,27 @@
+.controller-UsersSearchesNewCtrl, .controller-UsersSearchesEditCtrl, .controller-UsersSearchesShowCtrl {
+  .ui-select {
+    margin: 0;
+  }
+
+  .radio-selected-checkbox-group {
+    padding-left: 30px;
+
+    .ui-checkbox {
+      display: block;
+    }
+  }
+
+  .search-checkbox {
+    margin: 5px 0 10px 20px;
+  }
+
+  .ui-tags-input .tags .tag-list {
+    line-height: 15px;
+  }
+
+  .panel-action-links {
+    color: #333;
+    text-decoration: none;
+    cursor: pointer;
+  }
+}

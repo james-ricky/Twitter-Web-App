@@ -1,0 +1,79 @@
+<div class="page">
+  <div class="row">
+    <div class="col-md-12 clearfix">
+      <div ng-if="usersBase.me.role !== 'viewer'">
+        <a ui-sref="users.company_user_new" class="btn btn-primary pull-right">{{ 'users.company.field.newUser' | translate }}</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <strong><span class="glyphicon glyphicon-th"></span>{{ 'users.company.field.users' | translate }}</strong>
+    </div>
+    <div class="panel-body">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>{{ 'users.company.field.name' | translate }}</th>
+            <th>{{ 'users.company.field.email' | translate }}</th>
+            <th>{{ 'users.company.field.role' | translate }}</th>
+            <th>{{ 'users.company.field.createdAt' | translate }}</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="user in usersCompanyUsers.companyUsers" ng-class="{'danger': user.disabled}">
+            <td>
+              <span>{{ user.givenName }} {{ user.familyName }}</span>
+              <span ng-if="user.disabled" class="label label-danger">{{ 'users.company.field.disabled' | translate }}</span>
+            </td>
+            <td>{{ user.email }}</td>
+
+            <td >
+              <span ng-if="user.role">
+                {{ 'users.company.field.' + user.role | translate }}
+              </span>
+              <span class="label label-info" ng-if="user.isPrimaryUser">
+                {{ 'users.company.field.primaryUser' | translate }}
+              </span>
+
+              <span class="label label-warning" ng-if="user.companyConfirmed === false">
+                {{ 'users.company.field.unconfirmed' | translate }}
+              </span>
+            </td>
+
+            <td><span am-time-ago="user.createdAt"></span></td>
+            <td>
+              <div ng-if="usersBase.me.role === 'user' && user.companyConfirmed === true">
+                <span ng-if="!user.isPrimaryUser || usersBase.me.isPrimaryUser">
+                  <a ui-sref="users.company_user_edit({ id: user.id })" class="btn btn-default">
+                    {{ 'users.company.field.edit' | translate }}
+                  </a>
+                </span>
+
+                <span ng-if="usersBase.me.isPrimaryUser && user.id !== usersBase.me.id">
+                  <a
+                    ng-click="usersCompanyUsers.disable(user)"
+                    class="btn btn-danger"
+                    ng-if="!user.disabled">
+                    {{ 'users.company.field.disable' | translate }}
+                  </a>
+
+                  <a
+                    ng-click="usersCompanyUsers.enable(user)"
+                    class="btn btn-info"
+                    ng-if="user.disabled">
+                    {{ 'users.company.field.enable' | translate }}
+                  </a>
+                </span>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,38 @@
+<div>
+
+  <div class="confirmation-header">
+    <section class="logo text-center">
+      <h1>
+        <a ui-sref="public.login">
+          <img src="/images/logo.png" />
+          Lamplight
+        </a>
+      </h1>
+    </section>
+  </div>
+
+  <div class="form-container">
+    <div class="form-container text-center">
+      <form class="form-horizontal">
+        <div class="alert alert-danger" ng-if="publicConfirmation.errorMessage">
+          {{ publicConfirmation.errorMessage }}
+        </div>
+        <div class="alert alert-success" ng-if="publicConfirmation.noticeMessage">
+          {{ publicConfirmation.noticeMessage }}
+        </div>
+
+        <div class="divider divider-lg"></div>
+
+        <div class="form-group">
+          <div ng-if="publicConfirmation.processing">
+            <a href="" class="btn btn-lg btn-block btn-default">{{ 'public.confirmation.field.confirm' | translate }} ...</a>
+          </div>
+
+          <div ng-if="!publicConfirmation.processing">
+            <a ui-sref="public.login" class="btn btn-lg btn-block btn-primary">{{ 'public.confirmation.field.loginNow' | translate }}</a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

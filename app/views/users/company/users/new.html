@@ -1,0 +1,149 @@
+<div class="page">
+
+  <div class="divider"></div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <strong><span class="glyphicon glyphicon-th"></span>{{ 'users.company.field.newUser' | translate }}</strong>
+    </div>
+    <div class="panel-body">
+
+      <!-- #TODO Refactor to use ng-messages-include -->
+      <div class="alert alert-danger" ng-if="newUserProfile.$submitted &amp;&amp; newUserProfile.$invalid">
+        <ng-messages
+          for="newUserProfile.newUserProfileEmail.$error" ng-if="newUserProfile.newUserProfileEmail.$invalid">
+          <p ng-message="required">
+            <div>{{ 'users.profile.field.provideValidEmail' | translate }}</div>
+          </ng-message>
+        </ng-messages>
+        <ng-messages
+          for="newUserProfile.newUserProfileTitle.$error" ng-if="newUserProfile.newUserProfileTitle.$invalid">
+          <p ng-message="required">
+            <div>{{ 'users.profile.field.provideTitle' | translate }}</div>
+          </ng-message>
+        </ng-messages>
+        <ng-messages
+          for="newUserProfile.newUserProfileGivenName.$error" ng-if="newUserProfile.newUserProfileGivenName.$invalid">
+          <p ng-message="required">
+            <div>{{ 'users.profile.field.provideGivenName' | translate }}</div>
+          </ng-message>
+        </ng-messages>
+        <ng-messages
+          for="newUserProfile.newUserProfileFamilyName.$error" ng-if="newUserProfile.newUserProfileFamilyName.$invalid">
+          <p ng-message="required">
+            <div>{{ 'users.profile.field.provideFamilyName' | translate }}</div>
+          </ng-message>
+        </ng-messages>
+        <ng-messages
+          for="newUserProfile.newUserProfileMobileNumber.$error" ng-if="newUserProfile.newUserProfileMobileNumber.$invalid">
+          <p ng-message="required">
+            <div>{{ 'users.profile.field.provideMobileNumber' | translate }}</div>
+          </ng-message>
+        </ng-messages>
+        <ng-messages
+          for="newUserProfile.newUserProfileOfficeNumber.$error" ng-if="newUserProfile.newUserProfileOfficeNumber.$invalid">
+          <p ng-message="required">
+            <div>{{ 'users.profile.field.provideOfficeNumber' | translate }}</div>
+          </ng-message>
+        </ng-messages>
+        <ng-messages
+          for="newUserProfile.newUserProfileJobTitle.$error" ng-if="newUserProfile.newUserProfileJobTitle.$invalid">
+          <p ng-message="required">
+            <div>{{ 'users.profile.field.provideJobTitle' | translate }}</div>
+          </ng-message>
+        </ng-messages>
+      </div>
+
+      <form novalidate name="newUserProfile" ng-submit="usersCompanyUserNew.createUser()">
+        <div class="alert alert-danger" ng-if="usersCompanyUserNew.errorMessage">
+          {{ usersCompanyUserNew.errorMessage }}
+        </div>
+
+        <div class="form-group">
+          <label for="">{{ 'users.company.field.email' | translate }}</label>
+          <input name="newUserProfileEmail" type="email" class="form-control ng-pristine" required="" data-ng-model="usersCompanyUserNew.companyUser.email">
+        </div>
+
+        <div class="form-group">
+          <label for="">{{ 'users.company.field.title' | translate }}</label>
+
+          <br/>
+
+          <span class="ui-select">
+            <select name="newUserProfileTitle" ng-model="usersCompanyUserNew.companyUser.title" required="">
+              <option value="mr">{{ 'public.registrations.field.mr' | translate }}</option>
+              <!-- <option value="mrs">{{ 'public.registrations.field.mrs' | translate }}</option> -->
+              <option value="ms">{{ 'public.registrations.field.ms' | translate }}</option>
+            </select>
+          </span>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="">{{ 'users.company.field.givenName' | translate }}</label>
+              <input name="newUserProfileGivenName" type="text" class="form-control ng-pristine" required="" data-ng-model="usersCompanyUserNew.companyUser.givenName">
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="">{{ 'users.company.field.familyName' | translate }}</label>
+              <input name="newUserProfileFamilyName" type="text" class="form-control ng-pristine" required="" data-ng-model="usersCompanyUserNew.companyUser.familyName">
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="">{{ 'users.company.field.mobilePhoneNumber' | translate }}</label>
+              <input name="newUserProfileMobileNumber" type="text" class="form-control ng-pristine" required="" data-ng-model="usersCompanyUserNew.companyUser.mobilePhoneNumber">
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="">{{ 'users.company.field.officePhoneNumber' | translate }}</label>
+              <input name="newUserProfileOfficeNumber" type="text" class="form-control ng-pristine" required="" data-ng-model="usersCompanyUserNew.companyUser.officePhoneNumber">
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="">{{ 'users.company.field.jobTitle' | translate }}</label>
+              <input name="newUserProfileJobTitle" type="text" class="form-control ng-pristine" required="" data-ng-model="usersCompanyUserNew.companyUser.jobTitle">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="">{{ 'users.company.field.role' | translate }}</label>
+
+          <br/>
+
+          <label class="ui-radio" ng-if="usersBase.me.role !=='viewer'">
+            <input name="newUserProfileRole" type="radio" value="user" required="" ng-model="usersCompanyUserNew.companyUser.role"><span >{{ 'users.company.field.user' | translate }}</span>
+          </label>
+          <label class="ui-radio">
+            <input name="newUserProfileRole" type="radio" value="viewer" required="" ng-model="usersCompanyUserNew.companyUser.role"><span>{{ 'users.company.field.viewer' | translate }}</span>
+          </label>
+        </div>
+
+        <div class="form-group">
+          <label for="">{{ 'users.company.field.searches' | translate }}</label>
+
+          <br/>
+
+          <label class="ui-checkbox" ng-repeat="search in usersCompanyUserNew.allSearches">
+            <input type="checkbox" ng-model="usersCompanyUserNew.companyUser.searches[search.id]" value="{{ ::search.id }}" ><span>{{ ::search.name }}</span>
+          </label>
+        </div>
+
+        <input type="submit" value="{{ 'users.company.field.create' | translate }}" class="btn btn-primary" ng-disabled="newUserProfile.$invalid">
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,46 @@
+<div class="nav-wrapper component-UsersNavbarCtrl" ng-controller="UsersNavCtrl as usersNav">
+  <ul id="nav"
+      class="nav"
+      data-slim-scroll
+      data-collapse-nav
+      data-highlight-active>
+    <li>
+      <a ui-sref="users.home"> <i class="ti-home"></i><span translate="users.nav.home"></span> </a>
+    </li>
+    <li>
+      <a ui-sref="users.dashboards"> <i class="ti-home"></i><span translate="users.nav.dashboards"></span> </a>
+    </li>
+    <li>
+      <a ui-sref="users.searches"> <i class="ti-search"></i><span translate="users.nav.searches"></span> </a>
+    </li>
+    <!--
+    <li>
+      <a ui-sref="users.reports"><i class="ti-notepad"></i><span translate="users.nav.reports"></span></a>
+    </li>
+    <li>
+      <a ui-sref="users.alerts"><i class="ti-alarm-clock"></i><span>Alerts</span></a>
+      <ul>
+        <li><a ui-sref="users.alert_messages"><i class="ti-angle-right"></i><span>Alert Messages</span></a></li>
+        <li><a ui-sref="users.alert_settings"><i class="ti-angle-right"></i><span>Alert Settings</span></a></li>
+      </ul>
+    </li>
+    -->
+    <!-- <li>
+      <a ui-sref="users.support_help"><i class="ti-face-smile"></i><span translate="users.nav.support"></span></a>
+      <ul>
+        <li><a ui-sref="users.support_help"><i class="ti-angle-right"></i><span translate="users.nav.helpLibrary"></span></a></li>
+        <li><a ui-sref="users.support_training"><i class="ti-angle-right"></i><span translate="users.nav.training"></span></a></li>
+      </ul>
+    </li> -->
+    <li>
+      <a ui-sref="users.company_edit"><i class="ti-user"></i><span translate="users.nav.account"></span></a>
+      <ul>
+        <li><a ui-sref="users.company_edit"><i class="ti-angle-right"></i><span translate="users.nav.companyAccount"></span></a></li>
+        <li><a ui-sref="users.company_users"><i class="ti-angle-right"></i><span translate="users.nav.companyUsers"></span></a></li>
+        <li><a ui-sref="users.profile"><i class="ti-angle-right"></i><span translate="users.nav.myProfile"></span></a></li>
+        <li><a ui-sref="users.package"><i class="ti-angle-right"></i><span translate="users.nav.package">Package</span></a></li>
+
+      </ul>
+    </li>
+  </ul>
+</div>

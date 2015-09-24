@@ -1,0 +1,100 @@
+/*****************************************************************/
+/* Settings */
+/*****************************************************************/
+
+/* Colors */
+$black: #000000;
+
+$grey: #bbbbbb;
+$light-grey: #e8e8e8;
+$very-light-grey: #f4f4f4;
+
+$blue: #0abaee;
+
+$pink: #ea1f4a;
+
+$white: #ffffff;
+
+/* Dimensions */
+$custom-select-option-height: 50px;
+
+
+/*****************************************************************/
+/* Custom Select */
+/*****************************************************************/
+
+.custom-select {
+  font-size: 18px;
+  left: 0;
+  max-height: $custom-select-option-height - 1px;
+  overflow: hidden;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transform: translate3d(0,0,0); // enable hardware acceleration
+  transition: max-height 0.23s linear 0s;
+
+  &.expanded {
+    max-height: $custom-select-option-height * 6;
+  }
+
+  .option {
+    text-align: left;
+    background-color: $white;
+    color: $black;
+    cursor: pointer;
+    height: $custom-select-option-height - 1px;
+    position: relative;
+    transition: all 0.1s linear 0s;
+
+    .value {
+      display: block;
+      line-height: $custom-select-option-height - 2px;
+      padding: 0 12px;
+    }
+
+    &:hover {
+      background-color: lighten($blue, 7%);
+    }
+
+    &.disabled {
+      background-color: $black;
+      color: $light-grey;
+    }
+
+    &.placeholder {
+      background-color: transparent;
+      color: #aaa;
+      font-weight: 300;
+      padding-right: 10px;
+
+      & span:after {
+        content: "▼";
+        float: right;
+        color: #ccc;
+      }
+
+      .value {
+        padding: 0;
+        font-size: 16px;
+      }
+    }
+
+  }
+
+  @media screen and (max-width: 400px) {
+    font-size: 16px;
+    .option:hover {
+      background-color: $white;
+    }
+  }
+
+}
+
+.selected .custom-select .placeholder {
+  color: black;
+}
+
+.input-group-custom-select {
+  z-index: 9999;
+}

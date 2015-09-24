@@ -1,0 +1,52 @@
+<div>
+  <div class="reset-header">
+    <section class="logo text-center">
+      <h1>
+        <a ui-sref="public.login">
+          <img src="/images/logo.png" />
+          Lamplight
+        </a>
+      </h1>
+    </section>
+  </div>
+
+  <div class="form-container">
+
+    <div class="additional-info text-center">
+      <p class="text-small">{{ 'public.resetPassword.field.notice' | translate }}:</p>
+    </div>
+
+    <div class="form-container text-center">
+
+      <form class="form-horizontal" name="resetPasswordForm" ng-submit="publicResetPassword.resetPassword()">
+        <div class="alert alert-danger" ng-if="publicResetPassword.errorMessage">
+          {{ publicResetPassword.errorMessage }}
+        </div>
+        <div class="alert alert-success" ng-if="publicResetPassword.noticeMessage">
+          {{ publicResetPassword.noticeMessage }}
+        </div>
+
+        <div ng-if="publicResetPassword.showLoginLink">
+          <a ui-sref="public.login" class="btn btn-lg btn-block btn-primary">Login Now</a>
+        </div>
+
+        <div ng-if="!publicResetPassword.showLoginLink">
+          <div class="form-group">
+            <div class="input-group input-group-first">
+              <span class="input-group-addon">
+                <span class="ti-lock"></span>
+              </span>
+              <input type="password" class="form-control input-lg" placeholder="{{ 'public.resetPassword.field.password' | translate }}" required="" ng-model="publicResetPassword.userInfo.password">
+            </div>
+          </div>
+
+          <div class="divider divider-lg"></div>
+          <div class="form-group">
+            <input type="submit" class="btn btn-lg btn-block btn-primary" value="{{ 'public.resetPassword.field.savePassword' | translate }}" ng-disabled="publicResetPassword.formProcessing">
+          </div>
+        </div>
+      </form>
+    </div>
+
+  </div>
+</div>

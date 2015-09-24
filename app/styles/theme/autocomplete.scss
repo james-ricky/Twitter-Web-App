@@ -1,0 +1,71 @@
+/*****************************************************************/
+/* Settings */
+/*****************************************************************/
+
+/* Colors */
+$black: #000000;
+
+$grey: #bbbbbb;
+$light-grey: #e8e8e8;
+$very-light-grey: #f4f4f4;
+
+$blue: #0abaee;
+
+$pink: #ea1f4a;
+
+$white: #ffffff;
+
+/* Dimensions */
+$custom-select-option-height: 50px;
+
+
+/* AUTOCOMPLETE */
+
+.autocomplete {
+  width: 100%;
+  position: relative;
+}
+
+.autocomplete input{
+  font-size: 18px;
+  width: 100%;
+  padding: 0 12px;
+}
+
+.autocomplete ul {
+  position: absolute;
+  top: $custom-select-option-height - 10px;
+  left: 0;
+  width: 100%;
+  z-index: 1;
+
+  -webkit-padding-start: 0px;
+}
+
+.autocomplete li {
+  text-align: left;
+  list-style:none;
+  width: 100%;
+  line-height: 48px;
+  padding: 0 12px;
+  color: $grey;
+  background-color: #fff;
+  font-size: 18px;
+  height: $custom-select-option-height - 1px;
+}
+
+.autocomplete li.active{
+  width: 100%;
+  background-color: lighten($blue, 7%);
+}
+
+.autocomplete .highlight {
+  background-color: transparent;
+  color: $black;
+  padding: 0;
+}
+//
+// .autocomplete li.active .highlight {
+//   background: #666;
+//   color: #fff;
+// }

@@ -1,0 +1,37 @@
+<div class="page">
+  <div class="row">
+    <div class="col-md-12 clearfix">
+      <a ui-sref="users.report_new" class="btn btn-primary pull-right">{{ 'users.report.field.newReport' | translate }}</a>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <strong><span class="glyphicon glyphicon-th"></span>{{ 'users.report.field.reports' | translate }} </strong>
+    </div>
+    <div class="panel-body">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>{{ 'users.report.field.createAt' | translate }}</th>
+            <th>{{ 'users.report.field.name' | translate }}</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="report in usersReports.reports">
+            <td><span am-time-ago="report.createdAt"></span></td>
+            <td>{{ report.name }}</td>
+            <td>
+              <a ui-sref="users.report_edit({ id: report.id })" class="btn btn-default">
+                {{ 'users.report.field.edit' | translate }}
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

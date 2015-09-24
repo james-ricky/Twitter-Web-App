@@ -1,0 +1,41 @@
+<div class="page">
+  <div class="row">
+    <div class="col-md-12 clearfix">
+      <a ui-sref="users.alert_setting_new" class="btn btn-primary pull-right">New Alert Setting</a>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <strong><span class="glyphicon glyphicon-th"></span> Alert Settings</strong>
+    </div>
+    <div class="panel-body">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Created At</th>
+            <th>Key</th>
+            <th>Operator</th>
+            <th>Value</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="alertSetting in usersAlertSettings.alertSettings">
+            <td><span am-time-ago="alertSetting.createdAt"></span></td>
+            <td>{{ alertSetting.key }}</td>
+            <td>{{ alertSetting.operator }}</td>
+            <td>{{ alertSetting.value }}</td>
+            <td>
+              <a ui-sref="users.alert_setting_edit({ id: alertSetting.id })" class="btn btn-default">
+                Edit
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

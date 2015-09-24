@@ -1,0 +1,36 @@
+<div class="modal-content component-UsersTermsAndConditionsModalCtrl" >
+  <div class="modal-header">
+    <h4 class="modal-title">{{ 'public.registrations.showTermsAndConditions.userAgreement' | translate }}</h4>
+  </div>
+  <form name="addWidgetForm" ng-submit="usersTermsAndConditionsModal.updateAcceptedLatestTermsAndConditions()">
+    <div class="modal-body">
+      <div class="divider"></div>
+
+      <div class="form-container" ng-if="usersTermsAndConditionsModal.formProcessing === true">
+        <div class="alert alert-danger">
+          {{ 'users.home.field.disagree' | translate }}<b>{{ 'users.home.field.supportEmail' | translate }} !</b>
+        </div>
+      </div>
+
+      <p class="text-left">{{ 'public.registrations.showTermsAndConditions.byClicking' | translate }}<strong>{{ 'public.registrations.showTermsAndConditions.agree' | translate }}</strong> {{ 'public.registrations.showTermsAndConditions.noticeMessage' | translate }}.</p>
+
+      <div class="divider"></div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="panel panel-success">
+            <div class="panel-heading">
+              {{ 'public.registrations.showTermsAndConditions.termsAndCondition' | translate }}
+            </div>
+            <div class="panel-body" data-slim-scroll data-scroll-height="200px" ng-bind-html="usersTermsAndConditionsModal.termsAndConditionsHtml">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default pull-left" ng-click="usersTermsAndConditionsModal.showErrorMessage()">{{ 'public.registrations.showTermsAndConditions.disagree' | translate }}</button>
+      <input type="submit" value="{{ 'public.registrations.showTermsAndConditions.agree' | translate }}" class="btn btn-primary">
+    </div>
+  </form>
+</div><!-- /.modal-content -->

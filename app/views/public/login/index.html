@@ -1,0 +1,62 @@
+<div>
+  <div class="login-header">
+    <section class="logo text-center">
+      <h1>
+        <a ui-sref="public.login">
+          <img src="/images/logo.png" />
+          Lamplight
+        </a>
+      </h1>
+    </section>
+  </div>
+
+  <div class="login-body">
+    <div class="container">
+      <div class="form-container">
+
+        <form class="form-horizontal" ng-submit="publicLogin.login()">
+          <fieldset>
+            <div class="alert alert-danger" ng-if="publicLogin.errorMessage">
+              {{ publicLogin.errorMessage }}
+            </div>
+
+            <div class="form-group">
+              <div class="input-group input-group-first">
+                <span class="input-group-addon">
+                  <span class="ti-email"></span>
+                </span>
+                <input type="text" class="form-control input-lg" required="" placeholder="{{ 'public.login.field.email' | translate }}" ng-model="publicLogin.userInfo.email">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <span class="ti-lock"></span>
+                </span>
+                <input type="password" class="form-control input-lg" required="" placeholder="{{ 'public.login.field.password' | translate }}" ng-model="publicLogin.userInfo.password">
+              </div>
+            </div>
+
+            <div class="divider divider-xl"></div>
+            <div class="form-group">
+              <input type="submit" class="btn btn-primary btn-lg btn-block text-center" value="{{ 'public.login.field.start_lamplighting' | translate }}" ng-disabled="publicLogin.formProcessing">
+            </div>
+          </fieldset>
+        </form>
+
+        <div class="divider divider-xl"></div>
+
+        <section class="additional-info">
+          <p class="text-right">
+            <a ui-sref="public.register_step1" class="">{{ 'public.login.field.register_step1' | translate }}</a>
+          </p>
+
+          <p class="text-right">
+            <a ui-sref="public.forgot_password" class="">{{ 'public.login.field.lost_password' | translate }}</a>
+          </p>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>

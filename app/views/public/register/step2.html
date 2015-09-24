@@ -1,0 +1,218 @@
+<div>
+  <div class="register-header">
+    <section class="logo text-center">
+      <h1>
+        <a ui-sref="public.login">
+          <img src="/images/logo.png" />
+          Lamplight
+        </a>
+      </h1>
+    </section>
+  </div>
+
+  <div class="register-body">
+    <div class="container">
+      <div class="form-container">
+        <!-- breadcrumbs -->
+        <div id="status-buttons" class="text-center">
+          <a>1.{{ 'public.registrations.field.profile' | translate }}<span><i class="fa fa-chevron-right"></i></span></a>
+          <a class="active">2.{{ 'public.registrations.field.personalDetials' | translate }} <span><i class="fa fa-chevron-right"></i></span></a>
+          <a>3. {{ 'public.registrations.field.paymentPlan' | translate }}<span><i class="fa fa-chevron-right"></i></span></a>
+        </div>
+
+        <div class="additional-info text-center">
+          <p class="text-small">{{ 'public.registrations.field.step2Notice' | translate }}</p>
+        </div>
+
+        <section class="panel-body">
+          <form novalidate name="step2RegisterForm" class="form-horizontal text-center" ng-submit="publicRegisterStep2.updateRegistrationInfoDetails()">
+            <div class="alert alert-danger" ng-if="publicRegisterStep2.errorMessage">
+              {{ publicRegisterStep2.errorMessage }}
+            </div>
+
+            <div class="alert alert-success" ng-if="publicRegisterStep2.noticeMessage">
+              {{ publicRegisterStep2.noticeMessage }}
+            </div>
+            <!-- #TODO Refactor to use ng-messages-include (template) -->
+            <div class="alert alert-danger" ng-if="step2RegisterForm.$submitted &amp;&amp; step2RegisterForm.$invalid">
+              <ng-messages
+                for="step2RegisterForm.myTitle.$error" ng-if="step2RegisterForm.myTitle.$invalid">
+                <p ng-message="required">
+                  <div>{{ 'users.profile.field.provideTitle' | translate }}</div>
+                </ng-message>
+              </ng-messages>
+              <ng-messages
+                for="step2RegisterForm.myGivenName.$error" ng-if="step2RegisterForm.myGivenName.$invalid">
+                <ng-message when="required">
+                  <div>{{ 'users.profile.field.provideGivenName' | translate }}</div>
+                </ng-message>
+              </ng-messages>
+              <ng-messages
+                for="step2RegisterForm.myFamilyName.$error" ng-if="step2RegisterForm.myFamilyName.$invalid">
+                <ng-message when="required">
+                  <div>{{ 'users.profile.field.provideFamilyName' | translate }}</div>
+                </ng-message>
+              </ng-messages>
+              <ng-messages
+                for="step2RegisterForm.myJobTitle.$error" ng-if="step2RegisterForm.myJobTitle.$invalid">
+                <ng-message when="required">
+                  <div>{{ 'users.profile.field.provideJobTitle' | translate }}</div>
+                </ng-message>
+              </ng-messages>
+              <ng-messages
+                for="step2RegisterForm.myOfficePhoneNumber.$error" ng-if="step2RegisterForm.myOfficePhoneNumber.$invalid">
+                <ng-message when="required">
+                  <div>{{ 'users.profile.field.provideOfficeNumber' | translate }}</div>
+                </ng-message>
+              </ng-messages>
+              <ng-messages
+                for="step2RegisterForm.myMobilePhoneNumber.$error" ng-if="step2RegisterForm.myMobilePhoneNumber.$invalid">
+                <ng-message when="required">
+                  <div>{{ 'users.profile.field.provideMobileNumber' | translate }}</div>
+                </ng-message>
+              </ng-messages>
+              <ng-messages
+                for="step2RegisterForm.myIndustry.$error" ng-if="step2RegisterForm.myIndustry.$invalid">
+                <ng-message when="required">
+                  <div>{{ 'users.company.field.provideIndustry' | translate }}</div>
+                </ng-message>
+              </ng-messages>
+              <ng-messages
+                for="step2RegisterForm.myAddress.$error" ng-if="step2RegisterForm.myAddress.$invalid">
+                <ng-message when="required">
+                  <div>{{ 'users.company.field.provideAddress' | translate }}</div>
+                </ng-message>
+              </ng-messages>
+              <ng-messages
+                for="step2RegisterForm.myCountry.$error" ng-if="step2RegisterForm.myCountry.$invalid">
+                <ng-message when="required">
+                  <div>{{ 'users.company.field.provideCountry' | translate }}</div>
+                </ng-message>
+              </ng-messages>
+            </div>
+
+            <div class="form-group">
+              <span class="ui-select input-group input-group-first input-group-custom-select">
+                <select
+                  placeholder="{{ 'public.registrations.field.title' | translate }}"
+                  ng-model="publicRegisterStep2.userInfo.title"
+                  name="myTitle"
+                  ng-options="title as title.label for title in publicRegisterStep2.allTitles()"
+                  class="form-control input-lg"
+                  ng-class="{'selected': publicRegisterStep2.userInfo.title !== null}"
+                  ng-tabindex="0"
+                  ng-keypress="step2RegisterForm.$submitted=false"
+                  required="">
+                  <option value="" disabled>{{ 'public.registrations.field.title' | translate }}</option>
+                </select>
+              </span>
+            </div>
+
+            <div class="form-group">
+              <div class="input-group">
+                <div class="row">
+                  <div class="col-sm-6">
+                    <input name="myGivenName" type="text" tabindex="1" class="form-control input-lg register-given-name" placeholder="{{ 'public.registrations.field.givenName' | translate }}" required="" ng-model="publicRegisterStep2.userInfo.givenName">
+                  </div>
+                  <div class="col-sm-6">
+                    <input name="myFamilyName" type="text" tabindex="2" class="form-control input-lg" placeholder="{{ 'public.registrations.field.familyName' | translate }}" required="" ng-model="publicRegisterStep2.userInfo.familyName">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="input-group">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <input name="myJobTitle" type="text" tabindex="3" class="form-control input-lg col-sm-12" placeholder="{{ 'public.registrations.field.jobTitle' | translate }}" required="" ng-model="publicRegisterStep2.userInfo.jobTitle">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="input-group">
+                <div class="row">
+                  <div class="col-sm-6">
+                    <input name="myOfficePhoneNumber" type="text" tabindex="4" class="form-control input-lg register-office-number" placeholder="{{ 'public.registrations.field.officePhoneNumber' | translate }}" required="" ng-model="publicRegisterStep2.userInfo.officePhoneNumber">
+                  </div>
+                  <div class="col-sm-6">
+                    <input name="myMobilePhoneNumber" type="text" tabindex="5" class="form-control input-lg" placeholder="{{ 'public.registrations.field.mobilePhoneNumber' | translate }}" required="" ng-model="publicRegisterStep2.userInfo.mobilePhoneNumber">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <span class="ui-select input-group input-group-first input-group-custom-select">
+                <select
+                  placeholder="{{ 'public.registrations.field.industry' | translate }}"
+                  name="myIndustry"
+                  ng-model="publicRegisterStep2.userInfo.industry"
+                  ng-options="industry as industry.name for industry in publicRegisterStep2.allCompanyIndustries"
+                  class="form-control input-lg"
+                  ng-class="{'selected': publicRegisterStep2.userInfo.industry !== null}"
+                  ng-tabindex="6"
+                  required="">
+                  <option value="" disabled>{{ 'public.registrations.field.industry' | translate }}</option>
+                </select>
+              </span>
+            </div>
+
+            <div class="form-group">
+              <div class="input-group">
+                <input name="myAddress" type="text" tabindex="7" class="form-control input-lg" placeholder="{{ 'public.registrations.field.addressLine1' | translate }}" required="" ng-model="publicRegisterStep2.userInfo.addressLine1">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="input-group">
+                <input
+                  type="text"
+                  tabindex="8"
+                  class="form-control input-lg"
+                  placeholder="{{ 'public.registrations.field.addressLine2' | translate }}"
+                  ng-model="publicRegisterStep2.userInfo.addressLine2">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="input-group">
+                <input
+                  type="text"
+                  tabindex="9"
+                  class="form-control input-lg"
+                  placeholder="{{ 'public.registrations.field.addressLine3' | translate }}"
+                  ng-model="publicRegisterStep2.userInfo.addressLine3">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <span class="ui-select input-group input-group-first input-group-custom-select">
+                <select
+                  ng-model="publicRegisterStep2.userInfo.country"
+                  name="myCountry"
+                  ng-options="country as country.name for country in publicRegisterStep2.allCountries"
+                  class="form-control input-lg"
+                  ng-class="{'selected': publicRegisterStep2.userInfo.country !== null}"
+                  placeholder="{{ 'public.registrations.field.country' | translate }}"
+                  tabindex="10"
+                  required="">
+                  <option value="" disabled>{{ 'public.registrations.field.country' | translate }}</option>
+                </select>
+              </span>
+            </div>
+
+            <div class="divider divider-lg"></div>
+
+            <div class="form-group">
+              <input type="submit" tabindex="11" value="{{ 'public.registrations.field.next' | translate }}" class="btn btn-primary btn-block btn-lg" ng-disabled="step2RegisterForm.$invalid">
+            </div>
+          </form>
+        </section>
+
+      </div>
+    </div>
+  </div>
+</div>

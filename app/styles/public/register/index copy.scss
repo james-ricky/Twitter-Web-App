@@ -1,0 +1,156 @@
+.controller-PublicRegisterStep1IndexCtrl {
+  background-image: -webkit-linear-gradient(top,#663530,#925342);
+  background-image: linear-gradient(to bottom,#663530,#925342);
+  background-color: #663530;
+
+  .ui-view-container {
+
+  }
+
+  h1 {
+      font-weight: 300;
+      color: $bright;
+      font-size: 54px;
+      margin-bottom: 30px;
+      a {
+          color: $bright;
+      }
+  }
+
+  .form-group {
+      margin: 0;
+  }
+  .input-group-first {
+      // border-top: 1px solid #DEDEDE;
+  }
+  .input-group {
+      padding: 6px 0;
+      border-bottom: 1px solid #DEDEDE;
+      width: 100%;
+
+      input, select, textarea {
+        color: #ccc;
+      }
+  }
+  .input-group-addon {
+      background: transparent;
+      border: 0;
+      font-size: 24px;
+      color: #ccc;
+  }
+  .input-lg {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .form-control {
+      border: 0;
+      border-radius: 0;
+      color: $bright;
+      font-weight: 300;
+      background: transparent;
+      font-size: 16px;
+  }
+
+  ::-webkit-input-placeholder { color: #aaa; font-weight: 300 }
+  :-moz-placeholder { color: #aaa; font-weight: 300 } // Firefox 18-
+  ::-moz-placeholder { color: #aaa; font-weight: 300 } // Firefox 19+
+  :-ms-input-placeholder { color: #aaa; font-weight: 300 }
+
+  .register-header {
+      margin-top: 50px;
+      @media (min-width: $screen-sm) {
+          margin-top: 100px;
+      }
+  }
+
+  .logo {
+      font-size: 26px;
+      font-weight: normal;
+      // text-transform: uppercase;
+      a {
+          &:hover {
+              text-decoration: none;
+          }
+      }
+  }
+
+  .register-body {
+      padding: 20px 10px;
+  }
+
+  .footer-links {
+    margin-bottom: 150px;
+  }
+
+  .form-container {
+      max-width: 420px;
+      margin: 10px auto;
+  }
+
+  .additional-info {
+      color: #ccc;
+      color: rgba(255,255,255,.6);
+      a {
+          color: #ccc;
+          color: rgba(255,255,255,.6);
+      }
+  }
+
+  .register-given-name {
+    border-right: solid 1px #DEDEDE;
+  }
+
+  .register-office-number {
+    border-right: solid 1px #DEDEDE;
+  }
+
+  .not-validated > i {
+    display: none;
+  }
+
+  .validating {
+    & > i.ti-close {
+      display: none;
+      color: #CCC;
+    }
+
+    & > i.ti-check {
+      display: none;
+    }
+
+    & > i.fa-spinner {
+      display: inline;
+    }
+  }
+
+  .validated-passed {
+    & > i.ti-close {
+      display: none;
+    }
+
+    & > i.ti-check {
+      display: inline;
+      color: #A3BE8C;
+    }
+
+    & > i.fa-spinner {
+      display: none;
+    }
+  }
+
+  .validated-failed {
+    & > i.ti-close {
+      display: inline;
+      color: #BF616A;
+    }
+
+    & > i.ti-check {
+      display: none;
+    }
+
+    & > i.fa-spinner {
+      display: none;
+    }
+  }
+}

@@ -1,0 +1,88 @@
+<header class="top-header clearfix component-UsersNavbarCtrl" ng-controller="UsersHeaderCtrl as usersHeader">
+
+  <!-- Logo -->
+  <div class="logo bg-primary">
+    <a ui-sref="users.home">
+      <span>Lamplight</span>
+    </a>
+  </div>
+
+  <!-- needs to be put after logo to make it work -->
+  <div class="menu-button" toggle-off-canvas>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+  </div>
+
+  <div class="top-nav">
+    <ul class="nav-left list-unstyled">
+      <li>
+        <a href="#/" data-toggle-nav-collapsed-min class="toggle-min">
+          <i class="ti-menu"></i>
+        </a>
+      </li>
+    </ul>
+
+    <ul class="nav-right pull-right list-unstyled">
+
+      <li class="dropdown" dropdown>
+        <a href="javascript:;" class="dropdown-toggle" dropdown-toggle data-toggle="dropdown">
+          <i class="ti-bell"></i>
+          <span class="badge badge-info">{{ usersHeader.alertMessages.length }}</span>
+        </a>
+        <div class="dropdown-menu with-arrow pull-right panel panel-default">
+          <div class="panel-heading">
+            {{ 'users.nav.youHave' | translate }} {{ usersHeader.alertMessages.length }} {{ 'users.nav.alerts' | translate }}
+          </div>
+          <ul class="list-group">
+            <li class="list-group-item" ng-repeat="alertMessage in usersHeader.alertMessages">
+              <span class="media-left media-icon">
+                <span class="btn-icon btn-icon-round btn-danger"><i class="ti-bell"></i></span>
+              </span>
+              <div class="media-body">
+                <span class="block">{{ alertMessage.text }}</span>
+                <!-- <span class="text-muted block">2min ago</span> -->
+              </div>
+            </li>
+          </ul>
+          <!-- <div class="panel-footer">
+            <a ui-sref="users.alerts">{{ 'users.nav.showAllAlerts' | translate }}</a>
+          </div> -->
+        </div>
+      </li>
+      <li class="dropdown text-normal nav-profile" dropdown>
+        <a href="javascript:;" class="dropdown-toggle" dropdown-toggle data-toggle="dropdown">
+          <span class="hidden-xs">
+            <span>{{ usersBase.me.givenName}} {{ usersBase.me.familyName}}</span>
+          </span>
+        </a>
+        <ul class="dropdown-menu with-arrow pull-right">
+          <li>
+            <a ui-sref="users.profile">
+              <i class="ti-user"></i>
+              <span>{{ 'users.nav.myProfile' | translate }}</span>
+            </a>
+          </li>
+          <li>
+            <a ng-click="usersHeader.logout()">
+              <i class="ti-export"></i>
+              <span>{{ 'users.nav.logout' | translate }}</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li class="dropdown langs text-normal" dropdown is-open="status.isopenLang">
+        <a href="javascript:;" class="dropdown-toggle  dropdown-toggleactive-flag" dropdown-toggle data-toggle="dropdown">
+          {{ usersBase.me.language.name }}
+        </a>
+        <ul class="dropdown-menu with-arrow pull-right" role="menu">
+          <li data-ng-show="usersBase.me.language !== language.locale" data-ng-repeat="language in usersBase.allLanguages">
+            <a href="javascript:;" data-ng-click="usersBase.setLanguage(language)">
+              {{ language.name }}
+            </a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</header>

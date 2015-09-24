@@ -1,0 +1,21 @@
+<div class="modal-content component-EditWidgetModalCtrl">
+  <div class="modal-header">
+    <button type="button" class="close" ng-click="editWidgetModal.cancel()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h4 class="modal-title">Edit Widget</h4>
+  </div>
+  <div class="modal-body">
+    <div class="ui-tab-container ui-tab-horizontal">
+
+      <widget-filter
+      widget-setting="editWidgetModal.widget.setting"
+        widget-modal="editWidgetModal"
+      ></widget-filter>
+      <div class="divider divider-lg"></div>
+
+      <div class="actions clearfix">
+        <a ng-click="editWidgetModal.updateWidget()" class="btn btn-primary pull-right">Update</a>
+      </div>
+    </div>
+    <!-- {{editWidgetModal.widget}} -->
+  </div>
+</div><!-- /.modal-content -->

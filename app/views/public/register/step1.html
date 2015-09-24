@@ -1,0 +1,97 @@
+<div>
+
+  <div class="register-header">
+    <section class="logo text-center">
+      <h1>
+        <a ui-sref="public.login">
+          <img src="/images/logo.png" />
+          Lamplight
+        </a>
+      </h1>
+    </section>
+  </div>
+
+  <div class="register-body">
+    <div class="container">
+      <div class="form-container">
+
+        <section>
+          <form class="form-horizontal text-center" ng-submit="publicRegisterStep1.register()">
+            <div class="alert alert-danger" ng-if="publicRegisterStep1.errorMessage">
+              {{ publicRegisterStep1.errorMessage }}
+            </div>
+            <div class="alert alert-success" ng-if="publicRegisterStep1.noticeMessage">
+              {{ publicRegisterStep1.noticeMessage }}
+            </div>
+
+            <div class="form-group">
+              <div class="input-group input-group-first">
+                <span class="input-group-addon">
+                  <span class="ti-home"></span>
+                </span>
+                <input type="text" class="form-control input-lg" placeholder="{{ 'public.registrations.field.companyName' | translate }}" required="" autofocus="true" ng-model="publicRegisterStep1.userInfo.companyName" ng-blur="publicRegisterStep1.startValidatingCompanyName()">
+                <span class="input-group-addon {{ publicRegisterStep1.companyNameValidationClass}}">
+                  <i class="fa fa-spinner fa-spin"></i>
+                  <i class="ti-check"></i>
+                  <i class="ti-close" tooltip-placement="right" tooltip="{{ 'public.registrations.field.companyNameExist' | translate }} " tooltip-append-to-body="true"></i>
+                </span>
+                <span class="input-group-addon">
+                  <i class="ti-help-alt" tooltip-placement="right" tooltip-html-unsafe="{{ 'public.registrations.field.tooltipName' | translate }}" tooltip-append-to-body="true"></i>
+                </span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <span class="ti-email"></span>
+                </span>
+                <input type="email" class="form-control input-lg" placeholder="{{ 'public.registrations.field.primaryUserEmail' | translate }}" required="" ng-model="publicRegisterStep1.userInfo.email" ng-blur="publicRegisterStep1.startValidatingEmail()">
+                <span class="input-group-addon {{ publicRegisterStep1.emailValidationClass}}">
+                  <i class="fa fa-spinner fa-spin"></i>
+                  <i class="ti-check"></i>
+                  <i class="ti-close" tooltip-placement="right" tooltip="{{ 'public.registrations.field.invalidEmail' | translate }}" tooltip-append-to-body="true"></i>
+                </span>
+                <span class="input-group-addon">
+                  <i class="ti-help-alt" tooltip-placement="right" tooltip-html-unsafe="{{ 'public.registrations.field.tooltipEmail' | translate }}" tooltip-append-to-body="true"></i>
+                </span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <span class="ti-lock"></span>
+                </span>
+                <input type="password" class="form-control input-lg" placeholder="{{ 'public.registrations.field.password' | translate }}" required="" ng-minlength="6" ng-maxlength="12" ng-model="publicRegisterStep1.userInfo.password" ng-blur="publicRegisterStep1.startValidatingPassword()" ng-keypress="publicRegisterStep1.startValidatingPassword()">
+                <span class="input-group-addon {{ publicRegisterStep1.passwordValidationClass}}">
+                  <i class="fa fa-spinner fa-spin"></i>
+                  <i class="ti-check"></i>
+                  <i class="ti-close" tooltip-placement="right" tooltip="{{ 'public.registrations.field.tooltipPassword' | translate }}" tooltip-append-to-body="true"></i>
+                </span>
+                <span class="input-group-addon">
+                  <i class="ti-help-alt" tooltip-placement="right" tooltip-html-unsafe="{{ 'public.registrations.field.tooltipPassword' | translate }}" tooltip-append-to-body="true"></i>
+                </span>
+              </div>
+            </div>
+
+            <div class="divider divider-lg"></div>
+
+            <div class="form-group">
+              <input type="submit" value="{{ 'public.registrations.field.submit' | translate }}" class="btn btn-primary btn-block btn-lg" ng-disabled="publicRegisterStep1.validationFailed() || publicRegisterStep1.formProcessing">
+            </div>
+          </form>
+        </section>
+
+        <div class="divider divider-xl"></div>
+
+        <section class="additional-info">
+          <p class="text-right">
+            <a ui-sref="public.login" class="">{{ 'public.registrations.field.loginLink' | translate }}</a>
+          </p>
+        </section>
+
+      </div>
+    </div>
+  </div>
+</div>

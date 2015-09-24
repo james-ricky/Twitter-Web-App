@@ -1,0 +1,314 @@
+<div class="page">
+
+  <div class="divider"></div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <strong><span class="glyphicon glyphicon-th"></span>{{ 'users.searches.field.newSearch' | translate }}</strong>
+    </div>
+    <div class="panel-body">
+      <form novalidate name="createSearchForm" ng-submit="usersSearchNew.createSearch()">
+        <div class="row">
+
+          <div class="alert alert-danger" ng-if="createSearchForm.$submitted &amp;&amp; createSearchForm.$invalid">
+            <ng-messages
+              for="createSearchForm.newSearchName.$error" ng-if="createSearchForm.newSearchName.$invalid">
+              <p ng-message="required">
+                <div>{{ 'users.searches.field.newSearchName' | translate }}</div>
+              </ng-message>
+            </ng-messages>
+            <ng-messages
+              for="createSearchForm.newSearchPurpose.$error" ng-if="createSearchForm.newSearchPurpose.$invalid">
+              <p ng-message="required">
+                <div>{{ 'users.searches.field.provideSearchPurpose' | translate }}</div>
+              </ng-message>
+            </ng-messages>
+            <ng-messages
+              for="createSearchForm.newSearchIndustry.$error" ng-if="createSearchForm.newSearchIndustry.$invalid">
+              <p ng-message="required">
+                <div>{{ 'users.searches.field.provideIndustryForSearch' | translate }}</div>
+              </ng-message>
+            </ng-messages>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="">{{ 'users.searches.field.name' | translate }}</label>
+              <i class="ti-help-alt" tooltip-placement="right" tooltip="{{ 'users.searches.field.name' | translate }}" tooltip-append-to-body="true"></i>
+              <input autofocus type="text" class="form-control ng-pristine" required="" data-ng-model="usersSearchNew.search.name" name="newSearchName">
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="">{{ 'users.searches.field.searchPurpose' | translate }}</label>
+              <i class="ti-help-alt" tooltip-placement="right" tooltip="{{ 'users.searches.field.why' | translate }}" tooltip-append-to-body="true"></i>
+
+              <br/>
+
+              <span class="ui-select">
+                <select
+                  name="newSearchPurpose"
+                  ng-model="usersSearchNew.search.searchPurpose"
+                  ng-options="searchPurpose as searchPurpose.name for searchPurpose in usersSearchNew.allSearchPurposes"
+                  required="">
+                  <option value="">--- {{ 'users.searches.field.selectOne' | translate }} ---</option>
+                </select>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="">{{ 'users.searches.field.relevantIndustry' | translate }}</label>
+              <i class="ti-help-alt" tooltip-placement="right" tooltip="{{ 'users.searches.field.relevantIndustry' | translate }}" tooltip-append-to-body="true"></i>
+              <br/>
+
+              <span class="ui-select">
+                <select
+                  name="newSearchIndustry"
+                  ng-model="usersSearchNew.search.industry"
+                  ng-options="industry as industry.name for industry in usersSearchNew.allIndustries"
+                  required="">
+                  <option value="">--- {{ 'users.searches.field.selectOne' | translate }} ---</option>
+                </select>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="">{{ 'users.searches.field.targetGeography' | translate }}</label>
+              <i class="ti-help-alt" tooltip-placement="right" tooltip="{{ 'users.searches.field.location' | translate }}" tooltip-append-to-body="true"></i>
+
+              <br/>
+
+              <div
+                ivh-treeview="usersSearchNew.search.continents"
+                ivh-treeview-label-attribute="'name'">
+              </div>
+
+              <!-- <div class="row">
+                <div class="col-md-2" ng-repeat="continent in usersSearchNew.allContinents">
+                  <div>
+                    {{ continent.name }}
+                  </div>
+                  <div ng-repeat="region in continent.regions">
+                    <div>
+                      <div>{{ region.name }}</div>
+                      <div ng-repeat="country in region.countries">
+                        <label class="ui-checkbox">
+                          <input type="checkbox" name="country" ng-model="usersSearchNew.search.countries[country.id]" ng-value="country.id" ng-required="!usersSearchNew.selectedAtLeastOneCountry()"><span>{{ country.name }}</span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div> -->
+            </div>
+          </div>
+        </div>
+
+        <div class="divider divider-dashed"></div>
+        <div class="divider divider-lg"></div>
+
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="">{{ 'users.searches.field.startDate' | translate }}</label>
+              <i class="ti-help-alt" tooltip-placement="right" tooltip="{{ 'users.searches.field.startDate' | translate }}" tooltip-append-to-body="true"></i>
+              <div class="row">
+                <div class="col-md-4">
+                  <label class="ui-checkbox search-checkbox">
+                    <input type="checkbox" ng-model="usersSearchNew.search.startNow" ><span>{{ 'users.searches.field.startNow' | translate }}</span>
+                  </label>
+                </div>
+
+                <div class="col-md-6" ng-if="!usersSearchNew.search.startNow">
+                  <div class="input-group ui-datepicker">
+                    <input type="text"
+                       name="newSearchStartDate"
+                       class="form-control"
+                       datepicker-popup="yyyy-MM-dd"
+                       ng-model="usersSearchNew.search.startDate"
+                       is-open="usersSearchNew.search.startDateOpened"
+                       min-date="usersSearchNew.search.minDate"
+                       datepicker-options="usersSearchNew.dateOptions"
+                       ng-required="true"
+                       close-text="Close"
+                       required="">
+                     <span class="input-group-addon" ng-click="usersSearchNew.toggleOpenStartDate($event)"><i class="ti-calendar"></i></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="">{{ 'users.searches.field.endDate' | translate }}</label>
+              <i class="ti-help-alt" tooltip-placement="right" tooltip="{{ 'users.searches.field.endDate' | translate }}" tooltip-append-to-body="true"></i>
+
+              <div class="row">
+                <div class="col-md-4">
+                  <label class="ui-checkbox search-checkbox">
+                    <input type="checkbox" ng-model="usersSearchNew.search.neverEnd" ><span>{{ 'users.searches.field.neverEnd' | translate }}</span>
+                  </label>
+                </div>
+
+                <div class="col-md-6" ng-if="!usersSearchNew.search.neverEnd">
+                  <div class="input-group ui-datepicker">
+                    <input type="text"
+                       class="form-control"
+                       datepicker-popup="yyyy-MM-dd"
+                       ng-model="usersSearchNew.search.endDate"
+                       is-open="usersSearchNew.search.endDateOpened"
+                       min-date="usersSearchNew.search.startDate"
+                       datepicker-options="usersSearchNew.dateOptions"
+                       ng-required="true"
+                       close-text="Close">
+                    <span class="input-group-addon" ng-click="usersSearchNew.toggleOpenEndDate($event)"><i class="ti-calendar"></i></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <div class="row">
+                <div class="col-md-12">
+                  <label for="">{{ 'users.searches.field.sources' | translate }}</label>
+                  <i class="ti-help-alt" tooltip-placement="right" tooltip="{{ 'users.searches.field.dataSources' | translate }}" tooltip-append-to-body="true"></i>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-1">
+                  <label class="ui-radio">
+                    <input type="radio" ng-value="true" ng-model="usersSearchNew.search.allSources"><span>{{ 'users.searches.field.all' | translate }}</span>
+                  </label>
+                </div>
+                <div class="col-md-11">
+                  <label class="ui-radio">
+                    <input type="radio" ng-value="false" ng-model="usersSearchNew.search.allSources"><span>{{ 'users.searches.field.onlySelected' | translate }}</span>
+                  </label>
+
+                  <br/>
+
+                  <div class="radio-selected-checkbox-group" ng-if="usersSearchNew.search.allSources === false">
+                    <label class="ui-checkbox" ng-repeat="searchSource in usersSearchNew.allSearchSources">
+                      <input type="checkbox" ng-model="usersSearchNew.search.searchSources[searchSource.id]" ng-value="searchSource.id"><span>{{ searchSource.name }}</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="divider divider-dashed"></div>
+        <div class="divider divider-lg"></div>
+
+        <div class="panel panel-default" ng-repeat="keywordGroup in usersSearchNew.search.keywordGroups">
+          <div class="panel-heading">
+            <div class="pull-right">
+              <a ng-click="usersSearchNew.deleteKeywordGroup($index)" class="panel-action-links">
+                <i class="ti-minus"></i>
+              </a>
+            </div>
+            <strong><span class="glyphicon glyphicon-th"></span>{{ 'users.searches.field.keywordGroup' | translate }}  {{ $index + 1 }}</strong>
+            <i class="ti-help-alt" tooltip-placement="right" tooltip="{{ 'users.searches.field.keywordGroup' | translate }}" tooltip-append-to-body="true"></i>
+          </div>
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <label for="">{{ 'users.searches.field.language' | translate }}</label>
+                      <i class="ti-help-alt" tooltip-placement="right" tooltip="{{ 'users.searches.field.languageFor' | translate }}" tooltip-append-to-body="true"></i>
+
+                      <br/>
+
+                      <span class="ui-select">
+                        <select ng-model="keywordGroup.language">
+                          <option value="en">{{ 'users.searches.field.english' | translate }}</option>
+                          <option value="zh-TW">{{ 'users.searches.field.traditionalChinese' | translate }}</option>
+                          <option value="zh-CN">{{ 'users.searches.field.simplifiedChinese' | translate }}</option>
+                          <option value="id">{{ 'users.searches.field.indonesian' | translate }}</option>
+                          <option value="ja">{{ 'users.searches.field.japanese' | translate }}</option>
+                          <option value="ko">{{ 'users.searches.field.korean' | translate }}</option>
+                          <option value="ms">{{ 'users.searches.field.malaysian' | translate }}</option>
+                          <option value="nl">{{ 'users.searches.field.dutch' | translate }}</option>
+                          <option value="fr">{{ 'users.searches.field.french' | translate }}</option>
+                          <option value="de">{{ 'users.searches.field.german' | translate }}</option>
+                          <option value="it">{{ 'users.searches.field.italian' | translate }}</option>
+                          <option value="es">{{ 'users.searches.field.spanish' | translate }}</option>
+                        </select>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="">{{ 'users.searches.field.mustIncludeAll' | translate }}</label>
+                  <i class="ti-help-alt" tooltip-placement="right" tooltip="{{ 'users.searches.field.searchTerms' | translate }}" tooltip-append-to-body="true"></i>
+                  <br/>
+
+                  <tags-input placeholder="{{ 'users.searches.field.addKeywords' | translate }}" replace-spaces-with-dashes="false" min-length="1" ng-model="keywordGroup.containsAll" ng-keyup="usersSearchNew.detectChineseCharacter([keywordGroup, $event])" class="ui-tags-input"></tags-input>
+                </div>
+
+                <div class="form-group">
+                  <label for="">{{ 'users.searches.field.mustNotIncludeAll' | translate }}</label>
+                  <i class="ti-help-alt" tooltip-placement="right" tooltip="{{ 'users.searches.field.searchTerms' | translate }}" tooltip-append-to-body="true"></i>
+                  <br/>
+
+                  <tags-input placeholder="{{ 'users.searches.field.addKeywords' | translate }}" replace-spaces-with-dashes="false" min-length="1" ng-model="keywordGroup.notContainsAll" ng-keyup="usersSearchNew.detectChineseCharacter([keywordGroup, $event])" class="ui-tags-input"></tags-input>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="">{{ 'users.searches.field.mustIncludeAtLeast' | translate }}</label>
+                  <i class="ti-help-alt" tooltip-placement="right" tooltip="{{ 'users.searches.field.searchTerms' | translate }}" tooltip-append-to-body="true"></i>
+                  <br/>
+
+                  <tags-input placeholder="{{ 'users.searches.field.addKeywords' | translate }}" replace-spaces-with-dashes="false" min-length="1" ng-model="keywordGroup.containsAny" ng-keyup="usersSearchNew.detectChineseCharacter([keywordGroup, $event])" class="ui-tags-input"></tags-input>
+                </div>
+
+                <div class="form-group">
+                  <label for="">{{ 'users.searches.field.mustNotIncludeAtLeast' | translate }}</label>
+                  <i class="ti-help-alt" tooltip-placement="right" tooltip="{{ 'users.searches.field.searchTerms' | translate }}" tooltip-append-to-body="true"></i>
+                  <br/>
+
+                  <tags-input placeholder="{{ 'users.searches.field.addKeywords' | translate }}" replace-spaces-with-dashes="false" min-length="1" ng-model="keywordGroup.notContainsAny" ng-keyup="usersSearchNew.detectChineseCharacter([keywordGroup, $event])" class="ui-tags-input"></tags-input>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <a ng-click="usersSearchNew.addKeywordGroup()" class="btn btn-block btn-default">
+           {{ 'users.searches.field.addKeywordGroup' | translate }}
+        </a>
+
+        <div class="divider divider-lg"></div>
+
+        <input type="submit" value="{{ 'users.searches.field.create' | translate }}" class="btn btn-primary" ng-disabled="createSearchForm.$invalid">
+      </form>
+    </div>
+  </div>
+</div>

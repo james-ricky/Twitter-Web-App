@@ -1,0 +1,219 @@
+<div class="page">
+
+  <div class="divider"></div>
+
+  <div class="panel panel-default">
+    <div class="panel-body">
+
+      <h3>
+        {{ 'users.dashboards.field.dashboard' | translate }}: {{ usersDashboardShow.dashboard.name }}
+      </h3>
+
+      <div class="row">
+        <div class="col-md-12">
+          <label for="">{{ 'users.dashboards.field.searches' | translate }}</label>
+
+          <ul>
+            <li ng-repeat="search in usersDashboardShow.dashboard.searches">
+              {{ search.name }}
+
+              <a ui-sref="users.search_edit({ id: search.id })" ng-if="usersBase.me.role!=='viewer'">
+                <i class="ti-pencil"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="">{{ 'users.dashboards.field.startDate' | translate }}</label>
+
+            <div class="row">
+              <div class="col-md-3">
+                <div class="input-group ui-datepicker">
+                  <input type="text"
+                     class="form-control"
+                     datepicker-popup="yyyy-MM-dd"
+                     ng-model="usersDashboardShow.dashboard.startDate"
+                     is-open="usersDashboardShow.startDateOpened"
+                     min-date="usersDashboardShow.dashboard.earliestSearchStartDate"
+                     datepicker-options="usersDashboardShow.dateOptions"
+                     ng-required="true"
+                     close-text="Close">
+                   <span class="input-group-addon" ng-click="usersDashboardShow.toggleOpenStartDate($event)"><i class="ti-calendar"></i></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="">{{ 'users.dashboards.field.endDate' | translate }}</label>
+
+            <div class="row">
+              <div class="col-md-2">
+                <label class="ui-checkbox dashboard-checkbox">
+                  <input type="checkbox" ng-model="usersDashboardShow.dashboard.liveData" ><span>{{ 'users.dashboards.field.liveData' | translate }}</span>
+                </label>
+              </div>
+
+              <div class="col-md-3" ng-if="!usersDashboardShow.dashboard.liveData">
+                <div class="input-group ui-datepicker">
+                  <input type="text"
+                     class="form-control"
+                     datepicker-popup="yyyy-MM-dd"
+                     ng-model="usersDashboardShow.dashboard.endDate"
+                     is-open="usersDashboardShow.dashboard.endDateOpened"
+                     min-date="usersDashboardShow.dashboard.startDate"
+                     datepicker-options="usersDashboardShow.dateOptions"
+                     ng-required="true"
+                     close-text="Close">
+                  <span class="input-group-addon" ng-click="usersDashboardShow.toggleOpenEndDate($event)"><i class="ti-calendar"></i></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="pull-right" ng-if="usersBase.me.role!=='viewer'">
+        <!-- <a ng-click="usersDashboardShow.exportToPDF()" class="btn btn-default">
+          PDF
+        </a> -->
+      </div>
+
+      <div class="pull-right" ng-if="usersBase.me.role!=='viewer'">
+        <a ng-click="usersDashboardShow.showAddWidgetModal()" class="btn btn-default">
+          {{ 'users.dashboards.field.addWidget' | translate }}
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="divider">
+  </div>
+
+  <div class="row" ui-sortable="usersDashboardShow.sortableOptions" ng-model="usersDashboardShow.widgets">
+    <div class="col-md-{{ widget.setting.cols }}" ng-repeat="widget in usersDashboardShow.widgets">
+
+      <div class="panel panel-default" >
+        <div class="panel-body">
+          <div class="widget-setting-links pull-right" ng-if="usersBase.me.role!=='viewer'" >
+            <ul class="nav-left list-unstyled">
+              <li ng-if="usersDashboardShow.isEditableWidget(widget)">
+                <a href="javascript:;" ng-click="usersDashboardShow.showEditWidgetModal(widget)" title="Change Filter"><i class="ti-pencil"></i></a>
+              </li>
+              <li class="dropdown hidden-xs open" dropdown="" is-open="status.isopenSettings">
+                <a href="javascript:;" class="dropdown-toggle" dropdown-toggle="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" title="Resize">
+                  <i class="ti-settings"></i>
+                </a>
+                <div class="dropdown-menu pull-right with-arrow panel panel-default admin-options" ui-not-close-on-click="">
+                  <div class="panel-heading"> {{ 'users.dashboards.field.viewOptions' | translate }} </div>
+                  <ul class="list-group">
+                    <li class="list-group-item">
+                      <p>{{ 'users.dashboards.field.size' | translate }}</p>
+                      <label class="ui-radio" ng-repeat="sizeOption in usersDashboardShow.availableSizeOptions">
+                        <input name="widget-cols-{{ $parent.$index }}" type="radio" value="{{sizeOption}}" ng-click="usersDashboardShow.setResizeFlag()" ng-model="widget.setting.cols">
+                        <span>{{ (sizeOption / 12 * 100) | number:0 }}%</span>
+                      </label>
+                    </li>
+                    <li class="list-group-item" ng-if="widget.setting.chartType === 'timeSeries'">
+                      <p>{{ 'users.dashboards.field.granularity' | translate }}</p>
+                      <label class="ui-radio" ng-repeat="granularityOption in usersDashboardShow.availableGranularityOptions">
+                        <input name="widget-granularity-{{ $parent.$index }}" type="radio" value="{{granularityOption}}" ng-click="usersDashboardShow.setGranularity(widget)" ng-model="widget.setting.granularity">
+                        <span>{{ 'users.dashboards.granularity.' + granularityOption | translate }}</span>
+                      </label>
+                    </li>
+                    <li class="list-group-item" ng-if="widget.setting.chartType === 'feed'">
+                      <p>{{ 'users.dashboards.field.feedCount' | translate }}</p>
+                      <label class="ui-radio" ng-repeat="feedCountOption in usersDashboardShow.availableFeedCountOptions">
+                        <input name="widget-feedCount-{{ $parent.$index }}" type="radio" value="{{feedCountOption}}" ng-click="usersDashboardShow.setFeedCount(widget)" ng-model="widget.setting.feedCount">
+                        <span>{{feedCountOption}}</span>
+                      </label>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+              <li>
+                <a href="javascript:;" ng-click="usersDashboardShow.showDeleteWidgetConfirmationMessage($index)" title="Remove Widget">
+                  <i class="ti-close"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+        <div class="myHandle">
+          <h3 class="text-thin text-center widget-title">
+            {{ "users.dashboards.field." + widget.setting.widgetType | translate }}
+
+            <span ng-if="widget.setting.showWidgetOption">
+              <i
+               class="ti-filter"
+               tooltip-placement="right"
+               tooltip-html-unsafe="{{ widget.setting.filterOptionsDisplay }}"
+               tooltip-append-to-body="true">
+              </i>
+            </span>
+          </h3>
+        </div>
+
+          <div ng-if="widget.loading" class="text-center widget-loading">
+            <i class="fa fa-5x fa-spinner fa-spin"></i>
+          </div>
+
+          <div ng-if="!widget.loading">
+            <div ng-if="widget.noDataAvailable" class="widget-no-data-avalable">
+              <div class="alert alert-info text-center">
+                {{ 'users.dashboards.notice.noDataAvailableYet' | translate }}
+              </div>
+            </div>
+
+            <div ng-if="!widget.noDataAvailable">
+              <div ng-if="widget.setting.chartType !== 'feed' && widget.setting.chartType !== 'map'" ng-class="{'donut-chart-container': widget.setting.chartType === 'doughnut'}">
+                <div class="widget-{{$index}}" google-chart chart="widget.chart" style="height:300px; width: 100%">
+                </div>
+                <div class="donut-chart-center"
+                ng-class="{'sentiment__positive': widget.metaData.netSentiment > 0, 'sentiment__negative': widget.metaData.netSentiment < 0 }"
+                ng-if="widget.setting.widgetType ==='sentiment'">
+                  {{ widget.metaData.netSentimentLabel }}
+                </div>
+              </div>
+
+              <div ng-if="widget.setting.chartType === 'map'" class="vector-map">
+                <div class="widget-{{$index}}" google-chart chart="widget.chart" style="height:300px; width: 100%">
+                </div>
+              </div>
+
+              <div ng-if="widget.setting.chartType === 'feed'" width="100%" height="300px" data-slim-scroll data-scroll-always-visible="true" data-scroll-height="300px" data-scroll-data="widget.chartData">
+                <div ng-repeat="feed in widget.chartData">
+                  <a class="pull-left" href="{{ feed.platform_profile_url }}">
+                    <img alt="" src="{{ feed.avatar_url || 'http://placehold.it/64x64&text=No Image'}}" class="img-circle img64_64">
+                  </a>
+                  <div class="media-body">
+                    <h4 class="media-heading">
+                      <a href="{{ feed.feed_url }}">
+                        <i class="ti-{{ feed.platform }}" ng-if="feed.platform === 'facebook' || feed.platform === 'twitter' || feed.platform === 'tumblr' || feed.platform === 'youtube'"></i>
+                        <i class="ti-link" ng-if="feed.platform !== 'facebook' && feed.platform !== 'twitter' && feed.platform !== 'tumblr' && feed.platform !== 'youtube'"></i>
+                      </a>
+                    </h4>
+                    <p class="media-content" ng-bind-html="feed.content | limitTo: 140 | linky"></p>
+                  </div>
+                  <div class="divider"></div>
+                </div>
+                <button class="btn btn-block" href="#" ng-class="usersDashboardShow.nextPageDisabledClass(widget)"
+          ng-click="usersDashboardShow.loadMore(widget)">{{ 'users.dashboards.action.loadMore' | translate }}</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

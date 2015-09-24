@@ -1,0 +1,55 @@
+<div class="page">
+  <div class="row">
+    <div class="col-md-12 clearfix">
+      <div ng-if="usersDashboards.searches.length > 0">
+        <div ng-if="usersBase.me.role!=='viewer'">
+        <a ui-sref="users.dashboard_new" class="btn btn-primary pull-right">{{ 'users.dashboards.field.newDashboard' | translate }}</a>
+        </div>
+      </div>
+
+      <div ng-if="usersDashboards.searches && usersDashboards.searches.length === 0">
+        <div class="alert alert-warning" ng-bind-html="'users.dashboards.notice.noSearches' | translate">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <strong><span class="glyphicon glyphicon-th"></span> {{ 'users.dashboards.field.dashboards' | translate }}</strong>
+    </div>
+    <div class="panel-body">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>{{ 'users.dashboards.field.name' | translate }}</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="dashboard in usersDashboards.dashboards">
+            <td>{{ dashboard.name }}</td>
+            <td ng-if="usersBase.me.role!=='viewer'">
+              <a ui-sref="users.dashboard_show({ id: dashboard.id })" class="btn btn-default">
+                {{ 'users.dashboards.field.view' | translate }}
+              </a>
+              <a ui-sref="users.dashboard_edit({ id: dashboard.id })" class="btn btn-default">
+                {{ 'users.dashboards.field.edit' | translate }}
+              </a>
+              <a ng-click="usersDashboards.deleteDashboard(dashboard)" class="btn btn-danger">
+                {{ 'users.dashboards.field.delete' | translate }}
+              </a>
+            </td>
+            <td ng-if="usersBase.me.role==='viewer'">
+              <a ui-sref="users.dashboard_show({ id: dashboard.id })" class="btn btn-default">
+                {{ 'users.dashboards.field.view' | translate }}
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

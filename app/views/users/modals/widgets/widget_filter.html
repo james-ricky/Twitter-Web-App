@@ -1,0 +1,216 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="form-group">
+      <label for="">{{ 'users.dashboards.field.filter' | translate }} {{ widgetSetting.name }}</label>
+
+
+      <div ng-if="widgetModal.status === 'new'">
+        <label class="ui-radio">
+          <input name="radio-widget-{{ widgetSetting.widgetType }}" type="radio" value="" ng-model="widgetSetting.filterType">
+          <span>{{ 'users.dashboards.field.none' | translate }}</span>
+        </label>
+        <label class="ui-radio">
+          <input name="radio-widget-{{ widgetSetting.widgetType }}" type="radio" value="search" ng-model="widgetSetting.filterType">
+          <span>{{ 'users.dashboards.field.search' | translate }}</span>
+        </label>
+
+        <label class="ui-radio" ng-if="widgetSetting.widgetType !== 'language'">
+          <input name="radio-widget-{{ widgetSetting.widgetType }}" type="radio" value="language" ng-model="widgetSetting.filterType">
+          <span>{{ 'users.dashboards.field.language' | translate }}</span>
+        </label>
+
+        <label class="ui-radio" ng-if="widgetSetting.widgetType !== 'source'">
+          <input name="radio-widget-{{ widgetSetting.widgetType }}" type="radio" value="source" ng-model="widgetSetting.filterType">
+          <span>{{ 'users.dashboards.field.source' | translate }}</span>
+        </label>
+
+        <!--
+          <label class="ui-radio">
+            <input name="radio-widget-{{ widgetSetting.widgetType }}" type="radio" value="location" ng-model="widgetSetting.filterType">
+            <span>Location</span>
+          </label>
+        -->
+
+        <label class="ui-radio" ng-if="widgetSetting.widgetType !== 'sentiment'">
+          <input name="radio-widget-{{ widgetSetting.widgetType }}" type="radio" value="sentiment" ng-model="widgetSetting.filterType">
+          <span>{{ 'users.dashboards.field.sentiment' | translate }}</span>
+        </label>
+
+        <label class="ui-radio" ng-if="widgetSetting.widgetType !== 'gender'">
+          <input name="radio-widget-{{ widgetSetting.widgetType }}" type="radio" value="gender" ng-model="widgetSetting.filterType">
+          <span>{{ 'users.dashboards.field.gender' | translate }}</span>
+        </label>
+      </div>
+      <div ng-if="widgetModal.status === 'edit'">
+        By {{widgetSetting.filterType}}
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row" ng-if="widgetModal.status === 'edit' && ['volume', 'conversation', 'influence'].indexOf(widgetSetting.widgetType) === -1 ">
+  <div class="col-md-12">
+    <div class="form-group">
+      <label for="">Select Chart Type</label>
+      <div ng-repeat="chartType in widgetModal.availableChartTypes">
+        <label class="ui-radio">
+          <input name="radio-widget-{{ widgetSetting.widgetType }}" type="radio" value="{{chartType}}" ng-model="widgetSetting.chartType">
+          <span>{{chartType}}</span>
+        </label>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row" ng-if="widgetSetting.filterType !== ''">
+  <div class="col-md-12">
+    <div class="form-group">
+      <label for="">{{ 'users.dashboards.field.filterOptions' | translate }}</label>
+      <div ng-if="widgetSetting.filterType === 'search'">
+        <div ng-repeat="search in widgetModal.allSearches">
+          <label class="ui-checkbox dashboard-checkbox">
+            <input type="checkbox" name="search" ng-model="widgetSetting.filterOptions.searches[search.id]" ng-value="search.id"><span>{{ search.name }}</span>
+          </label>
+        </div>
+      </div>
+
+      <div ng-if="widgetSetting.filterType === 'language'">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="radio-selected-checkbox-group">
+              <div>
+                <label class="ui-checkbox">
+                  <input type="checkbox" ng-model="widgetSetting.languages['en']" value="en"><span>{{ 'users.dashboards.field.english' | translate }}</span>
+                </label>
+              </div>
+              <div>
+                <label class="ui-checkbox">
+                  <input type="checkbox" ng-model="widgetSetting.languages['zh-TW']" value="zh-TW"><span>{{ 'users.dashboards.field.traditionalChinese' | translate }} </span>
+                </label>
+              </div>
+              <div>
+                <label class="ui-checkbox">
+                  <input type="checkbox" ng-model="widgetSetting.languages['zh-CN']" value="zh-CN"><span>{{ 'users.dashboards.field.simplifiedChinese' | translate }}</span>
+                </label>
+              </div>
+              <div>
+                <label class="ui-checkbox">
+                  <input type="checkbox" ng-model="widgetSetting.languages['id']" value="id"><span>{{ 'users.dashboards.field.indonesian' | translate }} </span>
+                </label>
+              </div>
+              <div>
+                <label class="ui-checkbox">
+                  <input type="checkbox" ng-model="widgetSetting.languages['ja']" value="ja"><span>{{ 'users.dashboards.field.japanese' | translate }}</span>
+                </label>
+              </div>
+              <div>
+                <label class="ui-checkbox">
+                  <input type="checkbox" ng-model="widgetSetting.languages['ko']" value="ko"><span>{{ 'users.dashboards.field.korean' | translate }} </span>
+                </label>
+              </div>
+              <div>
+                <label class="ui-checkbox">
+                  <input type="checkbox" ng-model="widgetSetting.languages['ms']" value="ms"><span>{{ 'users.dashboards.field.malaysian' | translate }}</span>
+                </label>
+              </div>
+              <div>
+                <label class="ui-checkbox">
+                  <input type="checkbox" ng-model="widgetSetting.languages['nl']" value="nl"><span>{{ 'users.dashboards.field.dutch' | translate }} </span>
+                </label>
+              </div>
+              <div>
+                <label class="ui-checkbox">
+                  <input type="checkbox" ng-model="widgetSetting.languages['fr']" value="fr"><span>{{ 'users.dashboards.field.french' | translate }}</span>
+                </label>
+              </div>
+              <div>
+                <label class="ui-checkbox">
+                  <input type="checkbox" ng-model="widgetSetting.languages['de']" value="de"><span>{{ 'users.dashboards.field.german' | translate }} </span>
+                </label>
+              </div>
+              <div>
+                <label class="ui-checkbox">
+                  <input type="checkbox" ng-model="widgetSetting.languages['it']" value="it"><span>{{ 'users.dashboards.field.italian' | translate }}</span>
+                </label>
+              </div>
+              <div>
+                <label class="ui-checkbox">
+                  <input type="checkbox" ng-model="widgetSetting.languages['es']" value="es"><span>{{ 'users.dashboards.field.spanish' | translate }} </span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div ng-if="widgetSetting.filterType === 'source'">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="radio-selected-checkbox-group">
+              <div ng-repeat="searchSource in widgetModal.allSearchSources">
+                <label class="ui-checkbox">
+                  <input type="checkbox" ng-model="widgetSetting.searchSources[searchSource.id]" ng-value="searchSource.id"><span>{{ searchSource.name }}</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div ng-if="widgetSetting.filterType === 'location'">
+        <div class="row">
+          <div class="col-md-12">
+            <div
+              ivh-treeview="widgetSetting.continents"
+              ivh-treeview-label-attribute="'name'">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div ng-if="widgetSetting.filterType === 'sentiment'">
+        <div class="row">
+          <div class="col-md-12">
+            <div>
+              <label class="ui-checkbox dashboard-checkbox">
+                <input type="checkbox" name="widget-sentiment-{{ widgetSetting.widgetType }}-positive" ng-model="widgetSetting.sentiments['positive']" value="positive"><span>{{ 'users.dashboards.field.positive' | translate }}</span>
+              </label>
+            </div>
+            <div>
+              <label class="ui-checkbox dashboard-checkbox">
+                <input type="checkbox" name="widget-sentiment-{{ widgetSetting.widgetType }}-negative" ng-model="widgetSetting.sentiments['negative']" value="negative"><span>{{ 'users.dashboards.field.negative' | translate }}</span>
+              </label>
+            </div>
+            <div>
+              <label class="ui-checkbox dashboard-checkbox">
+                <input type="checkbox" name="widget-sentiment-{{ widgetSetting.widgetType }}-neutral" ng-model="widgetSetting.sentiments['neutral']" value="neutral"><span>{{ 'users.dashboards.field.neutral' | translate }}</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div ng-if="widgetSetting.filterType === 'gender'">
+        <div class="row">
+          <div class="col-md-12">
+            <div>
+              <label class="ui-checkbox dashboard-checkbox">
+                <input type="checkbox" name="widget-gender-{{ widgetSetting.widgetType }}-male" ng-model="widgetSetting.genders['male']" value="male"><span>{{ 'users.dashboards.field.male' | translate }}</span>
+              </label>
+            </div>
+            <div>
+              <label class="ui-checkbox dashboard-checkbox">
+                <input type="checkbox" name="widget-gender-{{ widgetSetting.widgetType }}-female" ng-model="widgetSetting.genders['female']" value="female"><span>{{ 'users.dashboards.field.female' | translate }}</span>
+              </label>
+            </div>
+            <div>
+              <label class="ui-checkbox dashboard-checkbox">
+                <input type="checkbox" name="widget-gender-{{ widgetSetting.widgetType }}-unknown" ng-model="widgetSetting.genders['unknown']" value="unknown"><span>{{ 'users.dashboards.field.unknown' | translate }}</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

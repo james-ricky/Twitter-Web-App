@@ -1,0 +1,88 @@
+pre {
+  background-color: ghostwhite;
+  border: 1px solid silver;
+  max-height: 400px;
+}
+
+.nested-listed--input {
+  padding: 20px 12px;
+}
+
+.angular-ui-tree-icon-collapse {
+  font-size: 20px;
+  line-height: 60px;
+}
+
+.date-range-slider-controls {
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+.date-range-slider-values {
+  margin-bottom: 20px;
+}
+
+.bs-callout {
+  height: 125px;
+}
+
+.bs-callout-success {
+  border-left: 5px solid $brand-success;
+}
+.bs-callout-primary {
+  border-left: 5px solid $brand-primary;
+}
+.bs-callout-danger {
+  border-left: 5px solid $brand-danger;
+}
+.bs-callout-warning {
+  border-left: 5px solid $brand-warning;
+}
+.bs-callout-info {
+  border-left: 5px solid $brand-info;
+}
+
+.media-content {
+  height: 40px;
+  font-size: 0.8em;
+}
+
+.donut-chart-container {
+  position: relative;
+}
+
+.donut-chart {
+  width: 300px;
+  height: 300px;
+  margin: auto;
+}
+
+.donut-chart-center {
+  height: 300px;
+  line-height: 300px;
+  position: absolute;
+  text-align: center;
+  top: 0;
+  vertical-align: middle;
+  width: 100%;
+  font-size: 3em;
+  font-weight: bold;
+  pointer-events: none;
+}
+
+.sentiment__positive {
+  color: #59B559;
+}
+
+.sentiment__negative {
+  color: #B55959;
+}
+
+.interaction-list {
+  height: 870px;
+  overflow-y: hidden;
+}
+
+.widget-filters {
+  min-height: 50px;
+}

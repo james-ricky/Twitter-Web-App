@@ -1,0 +1,167 @@
+
+<div class="page page-profile">
+  <div class="divider"></div>
+
+  <!-- <header class="profile-header">
+    <div class="profile-img">
+      <img alt="" src="http://placehold.it/200x200" class="img-circle">
+    </div>
+  </header> -->
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <strong><span class="glyphicon glyphicon-th"></span>{{ 'users.profile.field.userInfo' | translate }}</strong>
+    </div>
+    <div class="panel-body">
+      <!-- #TODO Refactor to use ng-messages-include -->
+      <div class="alert alert-danger" ng-if="editUserProfile.$submitted &amp;&amp; editUserProfile.$invalid">
+        <ng-messages
+          for="editUserProfile.userProfileEditEmail.$error" ng-if="editUserProfile.userProfileEditEmail.$invalid">
+          <p ng-message="required">
+            <div>{{ 'users.profile.field.provideValidEmail' | translate }}</div>
+          </ng-message>
+        </ng-messages>
+        <ng-messages
+          for="editUserProfile.userProfileEditTitle.$error" ng-if="editUserProfile.userProfileEditTitle.$invalid">
+          <p ng-message="required">
+            <div>{{ 'users.profile.field.provideTitle' | translate }}</div>
+          </ng-message>
+        </ng-messages>
+        <ng-messages
+          for="editUserProfile.userProfileEditGivenName.$error" ng-if="editUserProfile.userProfileEditGivenName.$invalid">
+          <p ng-message="required">
+            <div>{{ 'users.profile.field.provideGivenName' | translate }}</div>
+          </ng-message>
+        </ng-messages>
+        <ng-messages
+          for="editUserProfile.userProfileEditFamilyName.$error" ng-if="editUserProfile.userProfileEditFamilyName.$invalid">
+          <p ng-message="required">
+            <div>{{ 'users.profile.field.provideFamilyName' | translate }}</div>
+          </ng-message>
+        </ng-messages>
+        <ng-messages
+          for="editUserProfile.userProfileEditMobilePhoneNumber.$error" ng-if="editUserProfile.userProfileEditMobilePhoneNumber.$invalid">
+          <p ng-message="required">
+            <div>{{ 'users.profile.field.provideMobileNumber' | translate }}</div>
+          </ng-message>
+        </ng-messages>
+        <ng-messages
+          for="editUserProfile.userProfileEditJobTitle.$error" ng-if="editUserProfile.userProfileEditJobTitle.$invalid">
+          <p ng-message="required">
+            <div>{{ 'users.profile.field.provideJobTitle' | translate }}</div>
+          </ng-message>
+        </ng-messages>
+      </div>
+
+      <form novalidate name="editUserProfile" ng-submit="usersProfileShow.updateInfo()">
+        <div class="form-group">
+          <label for="">{{ 'users.profile.field.email' | translate }}</label>
+          <input autofocus name="userProfileEditEmail" type="email" class="form-control ng-pristine" required="" data-ng-model="usersProfileShow.me.email">
+          <div class="help-block">
+            {{ 'users.profile.field.email_change' | translate }}
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="">{{ 'users.profile.field.title' | translate }}</label>
+
+          <br/>
+
+          <span class="ui-select">
+            <select name="userProfileEditTitle" ng-model="usersProfileShow.me.title" required="">
+              <option value="mr">{{ 'public.registrations.field.mr' | translate }}</option>
+              <option value="ms">{{ 'public.registrations.field.ms' | translate }}</option>
+              <!-- <option value="ms">{{ 'public.registrations.field.ms' | translate }}</option> -->
+            </select>
+          </span>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="">{{ 'users.profile.field.givenName' | translate }}</label>
+              <input name="userProfileEditGivenName" type="text" class="form-control ng-pristine" required="" data-ng-model="usersProfileShow.me.givenName">
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="">{{ 'users.profile.field.familyName' | translate }}</label>
+              <input name="userProfileEditFamilyName" type="text" class="form-control ng-pristine" required="" data-ng-model="usersProfileShow.me.familyName">
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="">{{ 'users.profile.field.mobilePhoneNumber' | translate }}</label>
+              <input name="userProfileEditMobilePhoneNumber" type="text" class="form-control ng-pristine" required="" data-ng-model="usersProfileShow.me.mobilePhoneNumber">
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="">{{ 'users.profile.field.officePhoneNumber' | translate }}</label>
+              <input name="userProfileEditOfficePhoneNumber" type="text" class="form-control ng-pristine" required="" data-ng-model="usersProfileShow.me.officePhoneNumber">
+              <div class="help-block">
+                {{ 'users.profile.field.office_phone_number' | translate }}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="">{{ 'users.company.field.jobTitle' | translate }}</label>
+              <input name="userProfileEditJobTitle" type="text" class="form-control ng-pristine" required="" data-ng-model="usersProfileShow.me.jobTitle">
+            </div>
+          </div>
+        </div>
+
+        <input type="submit" value="{{ 'users.profile.field.update' | translate }}" class="btn btn-primary" ng-disabled="editUserProfile.$invalid">
+      </form>
+    </div>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <strong><span class="glyphicon glyphicon-th"></span>{{ 'users.profile.field.changePassword' | translate }} </strong>
+    </div>
+    <div class="panel-body">
+      <form ng-submit="usersProfileShow.updatePassword()">
+        <div class="form-group">
+          <label for="">{{ 'users.profile.field.currentPassword' | translate }}</label>
+          <input type="password" class="form-control ng-pristine" required="" data-ng-model="usersProfileShow.me.currentPassword">
+        </div>
+
+        <div class="form-group">
+          <label for="">{{ 'users.profile.field.newPassword' | translate }}</label>
+          <input type="password" class="form-control ng-pristine" required="" data-ng-model="usersProfileShow.me.newPassword">
+        </div>
+
+        <input type="submit" value="{{ 'users.profile.field.update' | translate }}" class="btn btn-primary">
+      </form>
+    </div>
+  </div>
+
+  <div class="panel panel-danger">
+    <div class="panel-heading">
+      <strong><span class="glyphicon glyphicon-th"></span>{{ 'users.profile.field.deleteUser' | translate }} </strong>
+    </div>
+
+    <div class="panel-body">
+      <form ng-submit="usersProfileShow.showDeleteUserAccountConfirmationMessage()" ng-if="usersBase.me.isPrimaryUser === false">
+        <p class="alert alert-danger">
+          {{ 'users.profile.field.warning' | translate }}
+        </p>
+        <input type="submit" value="{{ 'users.profile.field.deleteAccount' | translate }}" class="btn btn-danger">
+      </form>
+
+      <p ng-if="usersBase.me.isPrimaryUser === true">
+        {{ 'users.profile.field.primaryAccount' | translate }}
+      </p>
+    </div>
+  </div>
+</div>

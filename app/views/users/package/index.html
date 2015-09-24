@@ -1,0 +1,128 @@
+<div class="page">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <strong><span class="glyphicon glyphicon-th"></span>{{ 'users.home.field.package' | translate }}</strong>
+    </div>
+  <div class="panel-body">
+
+  <div class="divider"></div>
+
+    <section>
+      <div class="row" class="package">
+        <div class="col-md-3 col-xsm-6">
+          <section class="pricing-table">
+            <div class="pricing-header">
+              <header> {{ 'users.home.field.yourPackage' | translate }} </header>
+
+              <hr/>
+
+              <div class="pricing-price">
+                <strong>
+                  <sup>{{ 'public.registrations.field.US' | translate }} $</sup><span>{{ usersPackage.package.package.pricePerMonth }}</span><sub>/{{ 'public.registrations.field.month' | translate }}</sub>
+                </strong>
+              </div>
+            </div>
+
+            <hr/>
+
+            <div class="pricing-body">
+              <div>
+                <h4>{{ 'public.registrations.field.credits' | translate }}</h4>
+              </div>
+                <p ng-if="usersPackage.package.package.searchesPerMonth === -1">
+                  <strong> {{ 'users.home.field.unlimit' | translate }} </strong>{{ 'users.home.field.searchPerMonth' | translate }}
+                </p>
+                <p ng-if="usersPackage.package.package.searchesPerMonth !== -1">
+                  <strong> {{usersPackage.package.package.searchesPerMonth}}</strong> {{ 'users.home.field.searchPerMonth' | translate }}
+                </p>
+                <p ng-if="usersPackage.package.package.searchesPerMonth === -1">
+                  <strong>{{ 'users.home.field.unlimit' | translate }}</strong>
+                  {{ 'public.registrations.field.mentionsPerMonth' | translate }}
+                </p>
+                <p ng-if="usersPackage.package.package.searchesPerMonth !== -1">
+                  <strong>{{ usersPackage.package.package.mentionsPerMonth }}</strong>
+                  {{ 'public.registrations.field.mentionsPerMonth' | translate }}
+                </p>
+              </div>
+            </section>
+          </div>
+
+          <div class="col-md-3 col-xsm-6">
+            <section class="pricing-table">
+              <div class="pricing-header">
+                <header>{{ 'users.home.field.yourUsage' | translate }}</header>
+              </div>
+
+              <hr/>
+
+              <div class="pricing-body">
+                <p>{{ 'users.home.field.start' | translate }}: <strong>{{usersPackage.startDate}}</strong></p>
+                <p>{{ 'users.home.field.end' | translate }}: <strong>{{usersPackage.endDate}}</strong></p>
+              </div>
+
+              <hr/>
+
+              <div class="pricing-body">
+                <div>
+                  <h4>{{ 'users.home.field.usage' | translate }}</h4>
+                </div>
+                <p ng-if="usersPackage.package.usage.searches === -1">
+                  <strong> {{ 'users.home.field.unlimit' | translate }} </strong>{{ 'users.home.field.searchPerMonth' | translate }}
+                </p>
+                <p ng-if="usersPackage.package.usage.searches !== -1">
+                  <strong> {{usersPackage.package.usage.searches}}</strong> {{ 'users.home.field.searchPerMonth' | translate }}
+                </p>
+                <p ng-if="usersPackage.package.usage.mentions === -1">
+                  <strong>{{ 'users.home.field.unlimit' | translate }}</strong>
+                  {{ 'public.registrations.field.mentionsPerMonth' | translate }}
+                </p>
+                <p ng-if="usersPackage.package.usage.mentions !== -1">
+                  <strong>{{ usersPackage.package.usage.mentions }}</strong>
+                  {{ 'public.registrations.field.mentionsPerMonth' | translate }}
+                </p>
+              </div>
+            </section>
+          </div>
+
+        <div class="col-md-3 col-xsm-6" >
+          <section class="pricing-table">
+            <div class="pricing-header">
+              <header> {{ 'users.home.field.topup' | translate }} </header>
+
+              <hr/>
+
+              <div class="pricing-price">
+                <strong>
+                  <sup>{{ 'public.registrations.field.US' | translate }} $</sup><span>{{ usersPackage.package.package.topup.pricePerMonth }}</span><sub>/{{ 'public.registrations.field.month' | translate }}</sub>
+                </strong>
+              </div>
+            </div>
+
+            <hr/>
+
+            <div class="pricing-body">
+              <div>
+                <h4>{{ 'public.registrations.field.credits' | translate }}</h4>
+              </div>
+                <p ng-if="usersPackage.package.package.topup.searchesPerMonth === -1">
+                  <strong> {{ 'users.home.field.unlimit' | translate }} </strong>{{ 'users.home.field.searchPerMonth' | translate }}
+                </p>
+                <p ng-if="usersPackage.package.package.topup.searchesPerMonth !== -1">
+                  <strong> {{usersPackage.package.package.topup.searchesPerMonth}}</strong> {{ 'users.home.field.searchPerMonth' | translate }}
+                </p>
+                <p ng-if="usersPackage.package.package.topup.searchesPerMonth === -1">
+                  <strong>{{ 'users.home.field.unlimit' | translate }}</strong>
+                  {{ 'public.registrations.field.mentionsPerMonth' | translate }}
+                </p>
+                <p ng-if="usersPackage.package.package.topup.searchesPerMonth !== -1">
+                  <strong>{{ usersPackage.package.package.topup.mentionsPerMonth }}</strong>
+                  {{ 'public.registrations.field.mentionsPerMonth' | translate }}
+                </p>
+              </div>
+            </section>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
